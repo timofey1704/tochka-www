@@ -39,7 +39,7 @@ const Filter = () => {
           <input
             type="text"
             value={titleFilter}
-            placeholder="Filter by title..."
+            placeholder="Поиск по названию..."
             onChange={handleTitleFilterChange}
           />
         </div>
@@ -47,7 +47,7 @@ const Filter = () => {
           <input
             type="text"
             value={authorFilter}
-            placeholder="Filter by author..."
+            placeholder="Поиск по автору..."
             onChange={handleAuthorFilterChange}
           />
         </div>
@@ -58,11 +58,11 @@ const Filter = () => {
               checked={onlyFavoriteFilter}
               onChange={handleOnlyFavoriteFilterChange}
             />
-            Only Favorite
+            Только избранные
           </label>
         </div>
         <button type="button" onClick={handleResetFilters}>
-          Reset Filters
+          Сбросить фильтры
         </button>
       </div>
     </div>

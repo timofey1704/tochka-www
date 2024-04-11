@@ -9,19 +9,19 @@ const Menu = () => {
         to="."
         end
       >
-        Home
+        Главная
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
         to="about"
       >
-        About
+        О нас
       </NavLink>
       <NavLink
         className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
         to="contacts"
       >
-        Contacts
+        Контакты
       </NavLink>
     </nav>
   )
