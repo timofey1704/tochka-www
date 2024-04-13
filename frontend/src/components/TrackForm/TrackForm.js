@@ -43,7 +43,7 @@ const TrackForm = () => {
 
   return (
     <div className="app-block track-form">
-      <h2>Send request for new track!</h2>
+      <h2>Записать трек</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Название трека: </label>
@@ -92,7 +92,7 @@ const TrackForm = () => {
               <FaSpinner className="spinner" />
             </>
           ) : (
-            'Send Request!'
+            'Написать нам!'
           )}
         </button>
       </form>

@@ -1,0 +1,8 @@
+.studio-name {
+  display: flex;
+  align-items: center;
+}
+
+.studio-name-one {
+  margin-right: 10px;
+}

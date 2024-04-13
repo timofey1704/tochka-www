@@ -1,0 +1,45 @@
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-img {
+  width: 193px;
+  height: 121px;
+  margin-right: 10px;
+}
+
+.header-name {
+  font-family: 'Post No Bills Jaffna SemiBold';
+  font-weight: 600;
+  font-size: 62px;
+}
+
+nav {
+  display: flex;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.Link,
+.activeLink {
+  color: #333; /* Темный цвет текста для контраста на светлом фоне */
+  background-color: #ccc; /* Серый фон для неактивных ссылок */
+  text-decoration: none; /* Убираем подчеркивание у ссылок */
+  padding: 5px 10px; /* Отступы вокруг текста каждой ссылки */
+  margin-right: 10px; /* Отступ справа для каждой ссылки */
+  border-radius: 5px; /* Скругленные углы для кнопок */
+  transition: background-color 0.3s, color 0.3s; /* Плавный переход для фона и цвета текста */
+}
+
+.activeLink {
+  background-color: #888; /* Более темный серый фон для активной ссылки */
+}
+
+.Link:hover {
+  background-color: #aaa; /* Чуть светлее серый фон при наведении */
+}
+
+.Link:last-child {
+  margin-right: 0; /* Убираем отступ справа у последней ссылки */
+}
