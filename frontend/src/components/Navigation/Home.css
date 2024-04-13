@@ -6,3 +6,91 @@
 .studio-name-one {
   margin-right: 10px;
 }
+
+.track-record {
+  display: flex;
+  align-items: flex-start;
+  z-index: 20;
+}
+
+.title-track-record {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 25px;
+  font-size: 35px;
+}
+
+.track-record-description {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin-left: 25px;
+  font-size: 25px;
+}
+
+.track-record-content {
+  flex: 1;
+  margin-top: 35px;
+  padding-right: 20px;
+}
+.track-record-price {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
+.track-record-img-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.track-record-img {
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 35px;
+}
+
+.horizontal-divider {
+  border: none;
+  height: 2px;
+  background-color: #ccc;
+  width: 50%; /* Установка длины в 50% от ширины родительского контейнера */
+  margin: 20px auto; /* Центрирование линии на странице */
+}
+
+.app-track-record {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.app-track-record input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.app-track-record button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.app-track-record button:hover {
+  background-color: #45a049;
+}
+
+.app-track-record label {
+  display: block;
+  margin-bottom: 5px;
+}

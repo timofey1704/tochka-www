@@ -1,0 +1,11 @@
+@media (min-width: 1024px) {
+  .slide-image img {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .slide-image img {
+    max-height: 300px;
+  }
+}

@@ -43,7 +43,7 @@ const TrackForm = () => {
 
   return (
     <div className="app-block track-form">
-      <h2>Записать трек</h2>
+      <h2 className="form-header">Записать трек</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="title">Название трека: </label>
@@ -76,11 +76,7 @@ const TrackForm = () => {
             />
           </div>
         </div>
-        {/* 
-        <button type="submit">Add Track</button> */}
-        {/* <button type="button" onClick={handleAddRandomBook}>
-          Add Random book
-        </button> */}
+
         <button
           type="button"
           onClick={handleAddRandomBookViaAPI}
@@ -88,7 +84,7 @@ const TrackForm = () => {
         >
           {isLoadingViaAPI ? (
             <>
-              <span>Sending....</span>
+              <span>Отправка...</span>
               <FaSpinner className="spinner" />
             </>
           ) : (
