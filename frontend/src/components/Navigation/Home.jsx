@@ -1,7 +1,7 @@
+import { NavLink } from 'react-router-dom'
 import React from 'react'
 import TrackForm from '../TrackForm/TrackForm'
-import Filter from '../Filter/Filter'
-import TrackList from '../TrackList/TrackList'
+
 import './Home.css'
 import swiperImg1 from '../../img/swiperImg1.jpeg'
 import swiperImg2 from '../../img/swiperImg2.jpg'
@@ -14,30 +14,23 @@ const images = [swiperImg1, swiperImg2, swiperImg3]
 const Home = () => {
   return (
     <>
-      <div className="studio-name">
-        <div className="studio-name-one">TOCHKA</div>
-        <div className="studio-name-two">STUDIO</div>
-      </div>
       <div>
         <ImageSlider images={images} className="slide-image" />
       </div>
-
       <div className="track-record">
         <div className="track-record-content">
           <div className="title-track-record">Запись трека</div>
           <div className="track-record-description">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum."
+            В нашей студии звукозаписи каждая нота находит свой путь к
+            совершенству. Мы обеспечиваем профессиональное звучание вашей
+            музыке, используя только лучшее оборудование и передовые технологии.
+            Наши звукоинженеры воплощают в жизнь любые ваши идеи, от первых
+            аккордов до финального мастеринга. Запишите свой трек у нас и
+            позвольте вашему творчеству зазвучать на весь мир!
           </div>
-          <div className="app-track-record">
-            <TrackForm />
+          <div className="track-record-price">
+            <NavLink to="/contacts">Цены</NavLink> от 400р / 2 часа!
           </div>
-          <div className="track-record-price">Цена xx/час</div>
         </div>
         <div className="track-record-img-container">
           <img src={trackRecord} alt="tracklogo" className="track-record-img" />
@@ -45,10 +38,11 @@ const Home = () => {
       </div>
 
       <hr className="horizontal-divider" />
-
-      <div className="app-right-column">
-        <Filter />
-        <TrackList />
+      {/* стилизовать по центру */}
+      <div className="home-bottom">
+        <div className="app-track-record">
+          <TrackForm />
+        </div>
       </div>
     </>
   )

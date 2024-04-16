@@ -1,7 +1,7 @@
 import React from 'react'
 
-const About = () => {
+const Photo = () => {
   return <h2>О нас</h2>
 }
 
-export default About
+export default Photo

@@ -1,12 +1,3 @@
-.studio-name {
-  display: flex;
-  align-items: center;
-}
-
-.studio-name-one {
-  margin-right: 10px;
-}
-
 .track-record {
   display: flex;
   align-items: flex-start;
@@ -14,15 +5,19 @@
 }
 
 .title-track-record {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Palanquin', sans-serif;
   margin-left: 25px;
   font-size: 35px;
+  font-weight: 700;
+  line-height: 87px;
 }
 
 .track-record-description {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Palanquin', sans-serif;
   margin-left: 25px;
-  font-size: 25px;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 33px;
 }
 
 .track-record-content {
@@ -30,9 +25,38 @@
   margin-top: 35px;
   padding-right: 20px;
 }
+
+.home-bottom {
+  display: flex;
+  justify-content: center; /* Центрирует содержимое по горизонтали */
+  align-items: center; /* Центрирует содержимое по вертикали */
+
+  text-align: center; /* Центрирование текста */
+}
+
+.app-track-record,
 .track-record-price {
+  margin: 0 10px; /* Добавляем небольшой отступ между элементами */
+}
+
+.track-record-price {
+  display: flex;
+  align-items: center; /* Центрирует текст и ссылку по вертикали */
+  gap: 10px; /* Расстояние между текстовыми элементами */
+  font-family: 'Palanquin', sans-serif;
+  font-size: 18px;
   margin-top: 25px;
   margin-left: 25px;
+  line-height: 32px;
+  color: #8b0000;
+}
+
+.Link,
+.activeLink {
+  text-decoration: none;
+}
+.activeLink {
+  font-weight: bold;
 }
 
 .track-record-img-container {
@@ -44,21 +68,22 @@
 
 .track-record-img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: auto;
   margin-top: 35px;
+  border-radius: 8px;
 }
 
 .horizontal-divider {
   border: none;
   height: 2px;
   background-color: #ccc;
-  width: 50%; /* Установка длины в 50% от ширины родительского контейнера */
-  margin: 20px auto; /* Центрирование линии на странице */
+  width: 50%;
+  margin: 20px auto;
 }
 
 .app-track-record {
   background-color: #ffffff;
-  padding: 20px;
+
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
@@ -77,12 +102,13 @@
 
 .app-track-record button {
   background-color: #4caf50;
+  position: center;
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
+  width: 95%;
   transition: background-color 0.3s;
 }
 
@@ -93,4 +119,16 @@
 .app-track-record label {
   display: block;
   margin-bottom: 5px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #007bff; /* Синий цвет для ссылок */
+  padding: 5px 10px; /* Отступы для ссылки */
+  border-radius: 5px; /* Скругленные углы для ссылки */
+  background-color: #e0e0e0; /* Светло-серый фон для ссылки */
+}
+
+nav a:hover {
+  background-color: #b0c4de; /* Изменение фона при наведении */
 }

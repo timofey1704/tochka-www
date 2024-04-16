@@ -8,7 +8,13 @@ const Menu = () => {
     <>
       <div className="header-container">
         <img src={header_logo} alt="logo" className="header-img" />
-        <div className="header-name">Точка</div>
+        <div className="header-name">TOCHKA</div>
+      </div>
+      <hr />
+
+      <div className="studio-name">
+        <div className="studio-name-one">TOCHKA</div>
+        <div className="studio-name-two">STUDIO</div>
       </div>
       <nav>
         <NavLink
@@ -16,19 +22,19 @@ const Menu = () => {
           to="."
           end
         >
-          Главная
+          Заказать трек
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-          to="about"
+          to="photo"
         >
-          О нас
+          Заказать фото/видеосъемку
         </NavLink>
         <NavLink
           className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
           to="contacts"
         >
-          Контакты
+          Контакты / Цены
         </NavLink>
       </nav>
     </>
