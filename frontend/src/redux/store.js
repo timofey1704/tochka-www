@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-
-import booksReducer from './slices/booksSlice'
+import tracksReducer from './slices/tracksSlice'
 import errorReducer from './slices/errorSlice'
 
 const store = configureStore({
   reducer: {
-    books: booksReducer,
+    tracks: tracksReducer,
     error: errorReducer,
   },
 })

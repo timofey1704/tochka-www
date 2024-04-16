@@ -2,14 +2,10 @@ import { useState } from 'react'
 import { FaSpinner } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-  addBook,
-  fetchBook,
+  fetchTrack,
   selectIsLoadingViaAPI,
-} from '../../redux/slices/booksSlice'
-import createBookWithID from '../../utils/createBookWithID'
-import { setError } from '../../redux/slices/errorSlice'
-// import booksData from '../../data/books.json'
-// import './TrackForm.css'
+} from '../../redux/slices/tracksSlice'
+// import { setError } from '../../redux/slices/errorSlice'
 
 const TrackForm = () => {
   const [title, setTitle] = useState('')
@@ -20,20 +16,18 @@ const TrackForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    if (title && author) {
-      const book = createBookWithID({ title, author, genre }, 'Manual')
-      dispatch(addBook(book))
-      setTitle('')
-      setAuthor('')
-      setGenre('')
-    } else {
-      dispatch(setError('Поля не могут быть пустыми!'))
-    }
   }
 
-  const handleAddRandomBookViaAPI = () => {
-    dispatch(fetchBook('http://localhost:4000/send-message'))
+  const handleTelegramRequest = () => {
+    const trackDetails = {
+      message: `Название трека: ${title}, Автор: ${author}, Жанр: ${genre}`,
+    }
+    dispatch(
+      fetchTrack({
+        url: 'http://localhost:4000/send-message',
+        data: trackDetails,
+      })
+    )
   }
 
   return (
@@ -74,7 +68,7 @@ const TrackForm = () => {
 
         <button
           type="button"
-          onClick={handleAddRandomBookViaAPI}
+          onClick={handleTelegramRequest}
           disabled={isLoadingViaAPI}
         >
           {isLoadingViaAPI ? (
