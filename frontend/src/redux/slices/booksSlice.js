@@ -9,17 +9,15 @@ const initialState = {
 }
 
 export const fetchBook = createAsyncThunk(
-  'books/fetchBook',
+  'localhost:4000/send-message',
   async (url, thunkAPI) => {
     try {
-      const res = await axios.get(url)
+      const res = await axios.postForm(url)
       return res.data
     } catch (error) {
       thunkAPI.dispatch(setError(error.message))
-      // ВАРИАНТ 1
+
       return thunkAPI.rejectWithValue(error)
-      // ВАРИАНТ 2
-      // throw error
     }
   }
 )
@@ -46,35 +44,35 @@ const booksSlice = createSlice({
     },
   },
   // ВАРИАНТ 1
-  extraReducers: {
-    [fetchBook.pending]: (state) => {
+  // extraReducers: {
+  //   [fetchBook.pending]: (state) => {
+  //     state.isLoadingViaAPI = true
+  //   },
+  //   [fetchBook.fulfilled]: (state, action) => {
+  //     state.isLoadingViaAPI = false
+  //     if (action?.payload?.title && action?.payload?.author) {
+  //       state.books.push(createBookWithID(action.payload, 'API'))
+  //     }
+  //   },
+  //   [fetchBook.rejected]: (state) => {
+  //     state.isLoadingViaAPI = false
+  //   },
+  // },
+  // ВАРИАНТ 2
+  extraReducers: (builder) => {
+    builder.addCase(fetchBook.pending, (state) => {
       state.isLoadingViaAPI = true
-    },
-    [fetchBook.fulfilled]: (state, action) => {
+    })
+    builder.addCase(fetchBook.fulfilled, (state, action) => {
       state.isLoadingViaAPI = false
-      if (action?.payload?.title && action?.payload?.author) {
+      if (action.payload.title && action.payload.author) {
         state.books.push(createBookWithID(action.payload, 'API'))
       }
-    },
-    [fetchBook.rejected]: (state) => {
+    })
+    builder.addCase(fetchBook.rejected, (state) => {
       state.isLoadingViaAPI = false
-    },
+    })
   },
-  // ВАРИАНТ 2
-  // extraReducers: (builder) => {
-  //     builder.addCase(fetchBook.pending, (state) => {
-  //         state.isLoadingViaAPI = true;
-  //     });
-  //     builder.addCase(fetchBook.fulfilled, (state, action) => {
-  //         state.isLoadingViaAPI = false;
-  //         if (action.payload.title && action.payload.author) {
-  //             state.books.push(createBookWithID(action.payload, 'API'));
-  //         }
-  //     });
-  //     builder.addCase(fetchBook.rejected, (state) => {
-  //         state.isLoadingViaAPI = false;
-  //     });
-  // },
 })
 
 export const { addBook, deleteBook, toggleFavorite } = booksSlice.actions

@@ -18,27 +18,22 @@ const TrackForm = () => {
   const isLoadingViaAPI = useSelector(selectIsLoadingViaAPI)
   const dispatch = useDispatch()
 
-  // const handleAddRandomBook = () => {
-  //   const randomIndex = Math.floor(Math.random() * booksData.length) // получение случайной книги от 1 до n где n = длина массива
-  //   const randomBook = booksData[randomIndex]
-  //   dispatch(addBook(createBookWithID(randomBook, 'Random'))) // получение действия типа ADD_BOOK с payload книгой с присвоенным ID
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault()
 
     if (title && author) {
-      const book = createBookWithID({ title, author }, 'Manual')
+      const book = createBookWithID({ title, author, genre }, 'Manual')
       dispatch(addBook(book))
       setTitle('')
       setAuthor('')
+      setGenre('')
     } else {
-      dispatch(setError('"Title" and "Author" fields can not be empty'))
+      dispatch(setError('Поля не могут быть пустыми!'))
     }
   }
 
   const handleAddRandomBookViaAPI = () => {
-    dispatch(fetchBook('http://localhost:4000/random-book-delayed'))
+    dispatch(fetchBook('http://localhost:4000/send-message'))
   }
 
   return (
