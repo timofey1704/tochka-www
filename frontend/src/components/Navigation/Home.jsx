@@ -1,15 +1,24 @@
 import { NavLink } from 'react-router-dom'
 import React from 'react'
 import TrackForm from '../TrackForm/TrackForm'
-
 import './Home.css'
 import swiperImg1 from '../../img/swiperImg1.jpeg'
 import swiperImg2 from '../../img/swiperImg2.jpg'
 import swiperImg3 from '../../img/swiperImg3.jpeg'
+import swiperImg4 from '../../img/swiperImg4.jpeg'
+import swiperImg9 from '../../img/swiperImg9.jpeg'
+import swiperImg10 from '../../img/swiperImg10.jpeg'
 import ImageSlider from '../Sliders/ImageSlider'
 import trackRecord from '../../img/trackRecord.png'
 
-const images = [swiperImg1, swiperImg2, swiperImg3]
+const images = [
+  swiperImg1,
+  swiperImg2,
+  swiperImg3,
+  swiperImg4,
+  swiperImg9,
+  swiperImg10,
+]
 
 const Home = () => {
   return (
@@ -31,19 +40,17 @@ const Home = () => {
           <div className="track-record-price">
             <NavLink to="/contacts">Цены</NavLink> от 400р / 2 часа!
           </div>
+          <div className="app-track-record">
+            <TrackForm />
+          </div>
         </div>
+
         <div className="track-record-img-container">
           <img src={trackRecord} alt="tracklogo" className="track-record-img" />
         </div>
       </div>
 
       <hr className="horizontal-divider" />
-      {/* стилизовать по центру */}
-      <div className="home-bottom">
-        <div className="app-track-record">
-          <TrackForm />
-        </div>
-      </div>
     </>
   )
 }

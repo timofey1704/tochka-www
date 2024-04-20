@@ -10,12 +10,6 @@ const Menu = () => {
         <img src={header_logo} alt="logo" className="header-img" />
         <div className="header-name">TOCHKA</div>
       </div>
-      <hr />
-
-      <div className="studio-name">
-        <div className="studio-name-one">TOCHKA</div>
-        <div className="studio-name-two">STUDIO</div>
-      </div>
       <nav>
         <NavLink
           className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
@@ -37,6 +31,12 @@ const Menu = () => {
           Контакты / Цены
         </NavLink>
       </nav>
+
+      <hr />
+      <div className="studio-name">
+        <div className="studio-name-one">TOCHKA</div>
+        <div className="studio-name-two">STUDIO</div>
+      </div>
     </>
   )
 }

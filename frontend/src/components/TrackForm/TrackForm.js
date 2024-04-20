@@ -5,7 +5,8 @@ import {
   fetchTrack,
   selectIsLoadingViaAPI,
 } from '../../redux/slices/tracksSlice'
-// import { setError } from '../../redux/slices/errorSlice'
+import './TrackForm.css'
+import { setError } from '../../redux/slices/errorSlice'
 
 const TrackForm = () => {
   const [title, setTitle] = useState('')
@@ -19,6 +20,10 @@ const TrackForm = () => {
   }
 
   const handleTelegramRequest = () => {
+    if (!title || !author || !genre) {
+      setError(console.log('123'))
+      return
+    }
     const trackDetails = {
       message: `Название трека: ${title}, Автор: ${author}, Жанр: ${genre}`,
     }

@@ -9,3 +9,37 @@
     max-height: 300px;
   }
 }
+
+.slick-slide {
+  margin-right: 20px;
+  border-radius: 15px;
+}
+
+.slick-slide img {
+  border-radius: 15px;
+}
+
+.slick-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(37, 35, 35, 0.8);
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.slick-arrow:hover {
+  background-color: rgb(16, 15, 15);
+}
+
+.slick-prev {
+  left: 10px;
+}
+
+.slick-next {
+  right: 10px;
+}
