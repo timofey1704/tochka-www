@@ -21,7 +21,7 @@ const TrackForm = () => {
 
   const handleTelegramRequest = () => {
     if (!title || !author || !genre) {
-      setError(console.log('123'))
+      dispatch(setError('Поля не могут быть пустыми!'))
       return
     }
     const trackDetails = {
