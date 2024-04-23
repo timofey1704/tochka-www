@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom'
 import React, { useState } from 'react'
-// import TrackForm from '../TrackForm/TrackForm'
 import TrackFormPopup from '../TrackFormPopup/TrackFormPopup'
 import './Home.css'
 import swiperImg1 from '../../img/swiperImg1.jpeg'
@@ -59,7 +58,6 @@ const Home = () => {
       {isPopupOpen && (
         <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
       )}{' '}
-      {/* если попап открыт, рендерим его */}
     </>
   )
 }
