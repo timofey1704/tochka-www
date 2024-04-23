@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { FaSpinner } from 'react-icons/fa'
+import InputMask from 'react-input-mask'
+
 import { useDispatch, useSelector } from 'react-redux'
 import {
   fetchTrack,
@@ -16,6 +18,8 @@ const TrackFormPopup = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isAuthorEmpty, setIsAuthorEmpty] = useState(true)
   const isLoadingViaAPI = useSelector(selectIsLoadingViaAPI)
+  // eslint-disable-next-line
+  const [isPhoneEmpty, setIsPhoneEmpty] = useState(true)
   const dispatch = useDispatch()
 
   const handleTelegramRequest = async () => {
@@ -25,7 +29,7 @@ const TrackFormPopup = ({ onClose }) => {
     }
     setIsLoading(true)
     const trackDetails = {
-      message: `Название трека: ${title}, Автор: ${author}, Контактный номер: ${phone}`,
+      message: `Название трека: ${title}, Автор: ${author}, Контактный номер: +${phone}`,
     }
     try {
       await dispatch(
@@ -46,6 +50,13 @@ const TrackFormPopup = ({ onClose }) => {
   const handleAuthorChange = (e) => {
     setAuthor(e.target.value)
     setIsAuthorEmpty(e.target.value === '')
+  }
+
+  const handlePhoneChange = (e) => {
+    // Оставляем только цифры
+    const phoneValue = e.target.value.replace(/\D/g, '')
+    setPhone(phoneValue)
+    setIsPhoneEmpty(phoneValue === '')
   }
 
   return (
@@ -82,12 +93,16 @@ const TrackFormPopup = ({ onClose }) => {
 
             <div>
               <label htmlFor="phone">Контактный телефон: </label>
-              <input
-                type="text"
-                id="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
+              <div className="phone-input-container">
+                <InputMask
+                  mask="+7 (999) 999-99-99"
+                  placeholder="+7 (___) ___-__-__"
+                  type="text"
+                  id="phone"
+                  value={phone}
+                  onChange={handlePhoneChange}
+                />
+              </div>
             </div>
 
             <button

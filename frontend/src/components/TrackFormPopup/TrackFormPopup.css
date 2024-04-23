@@ -114,8 +114,8 @@
 
 .at-symbol {
   position: absolute;
-  left: 5px;
-  top: 40%;
+  left: 10px;
+  top: 39%;
   transform: translateY(-50%);
   opacity: 0.5;
 }
@@ -125,7 +125,7 @@
 }
 
 #author {
-  padding-left: 20px;
+  padding-left: 25px;
 }
 
 /* mobile */
