@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import React from 'react'
-import TrackForm from '../TrackForm/TrackForm'
+import React, { useState } from 'react'
+// import TrackForm from '../TrackForm/TrackForm'
+import TrackFormPopup from '../TrackFormPopup/TrackFormPopup'
 import './Home.css'
 import swiperImg1 from '../../img/swiperImg1.jpeg'
 import swiperImg2 from '../../img/swiperImg2.jpg'
@@ -21,6 +22,11 @@ const images = [
 ]
 
 const Home = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const openPopup = () => {
+    setIsPopupOpen(true)
+  }
+
   return (
     <>
       <div>
@@ -41,7 +47,7 @@ const Home = () => {
             <NavLink to="/contacts">Цены</NavLink> от 400р / 2 часа!
           </div>
           <div className="app-track-record">
-            <TrackForm />
+            <button onClick={openPopup}>Записаться!</button>
           </div>
         </div>
 
@@ -49,8 +55,11 @@ const Home = () => {
           <img src={trackRecord} alt="tracklogo" className="track-record-img" />
         </div>
       </div>
-
       <hr className="horizontal-divider" />
+      {isPopupOpen && (
+        <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
+      )}{' '}
+      {/* если попап открыт, рендерим его */}
     </>
   )
 }

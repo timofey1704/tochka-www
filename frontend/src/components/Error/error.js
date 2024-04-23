@@ -9,7 +9,6 @@ const Error = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // Каждый раз, когда изменяется errorMessage, вызываем toast.warn
     if (errorMessage) {
       toast.warn(errorMessage)
       dispatch(clearError())

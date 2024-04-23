@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 
 app.post('/send-message', async (req, res) => {
   const message = req.body.message
-  console.log('Received message:', message) // Логируем полученное сообщение
+  console.log('Received message:', message)
 
   if (!message) {
     return res.status(400).send('No message provided')
@@ -26,10 +26,10 @@ app.post('/send-message', async (req, res) => {
       }
     )
 
-    console.log('Telegram response:', response.data) // Логируем ответ от Telegram
+    console.log('Telegram response:', response.data)
     res.send('Message sent successfully')
   } catch (error) {
-    console.log('Error sending message:', error.message) // Логируем ошибку
+    console.log('Error sending message:', error.message)
     res.status(500).send(`Failed to send message: ${error.message}`)
   }
 })
