@@ -118,6 +118,7 @@
   top: 39%;
   transform: translateY(-50%);
   opacity: 0.5;
+  font-size: 17px;
 }
 
 .at-symbol.empty {
