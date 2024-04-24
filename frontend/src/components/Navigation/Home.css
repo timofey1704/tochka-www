@@ -1,15 +1,10 @@
-.track-record {
-  display: flex;
-  align-items: flex-start;
-  z-index: 20;
-}
-
-.title-track-record {
+.track-record-title {
   font-family: 'Palanquin', sans-serif;
-  margin-left: 25px;
-  font-size: 35px;
-  font-weight: 700;
-  line-height: 87px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin: 20px;
+  text-align: center;
 }
 
 .track-record-description {
@@ -18,17 +13,7 @@
   font-size: 21px;
   font-weight: 500;
   line-height: 33px;
-}
-
-.track-record-content {
-  flex: 1;
-  margin-top: 35px;
-  padding-right: 20px;
-}
-
-.app-track-record,
-.track-record-price {
-  margin: 0 10px;
+  margin: 20px;
 }
 
 .track-record-price {
@@ -51,20 +36,6 @@
   font-weight: bold;
 }
 
-.track-record-img-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
-.track-record-img {
-  max-width: 100%;
-  max-height: auto;
-  margin-top: 35px;
-  border-radius: 8px;
-}
-
 .horizontal-divider {
   border: none;
   height: 2px;
@@ -73,32 +44,97 @@
   margin: 20px auto;
 }
 
-.track-record-content {
+.app-track-record,
+.track-record-price {
+  margin: 0 auto;
   display: flex;
-  flex-direction: column;
-}
-
-.app-track-record {
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-  max-width: 500px;
-  width: 100%;
+  justify-content: center;
 }
 
 .app-track-record button {
-  background-color: #4caf50;
+  background-color: #8b0000;
   position: center;
   color: white;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
+  width: auto;
   transition: background-color 0.3s;
 }
 
 .app-track-record button:hover {
-  background-color: #45a049;
+  background-color: #5c0202;
+}
+
+.app-track-record,
+.track-record-price {
+  margin: 0 10px;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+/* mobile */
+@media screen and (max-width: 767px) {
+  .studio-name {
+    flex-direction: row;
+    align-items: center;
+    font-size: 48px;
+    margin-top: 20px;
+  }
+
+  .studio-name-one {
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .track-record-title {
+    font-size: 28px;
+    text-align: center;
+    margin: 15px;
+  }
+
+  .title-track-record {
+    margin-left: 20px;
+    font-size: 25px;
+    line-height: 60px;
+    padding-bottom: 20px;
+  }
+
+  .track-record-description {
+    margin-left: 20px;
+    font-size: 16px;
+    line-height: 28px;
+    padding-top: 15px;
+  }
+  .track-record-img {
+    max-width: 90%;
+    max-height: 250px;
+    border-radius: 20px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .horizontal-divider {
+    width: 80%;
+    margin: 15px auto;
+  }
+
+  .app-track-record,
+  .track-record-price {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 15px auto;
+  }
+  .track-record-price {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .app-track-record button {
+    font-size: 14px;
+    padding: 10px 15px;
+  }
 }

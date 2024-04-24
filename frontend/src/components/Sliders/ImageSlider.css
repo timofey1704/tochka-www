@@ -1,20 +1,22 @@
 @media (min-width: 1024px) {
   .slide-image img {
     max-height: 400px;
+    max-width: calc(100% - 20px);
   }
 }
 
 @media (max-width: 1023px) {
   .slide-image img {
     max-height: 300px;
+    max-width: calc(100% - 20px);
   }
 }
-
 .slick-slide {
-  margin-right: 20px;
   border-radius: 15px;
 }
-
+.slick-slide:first-of-type {
+  margin-left: 10px;
+}
 .slick-slide img {
   border-radius: 15px;
 }
@@ -25,6 +27,7 @@
   transform: translateY(-50%);
   background-color: rgba(37, 35, 35, 0.8);
   padding: 10px;
+  line-height: 1;
   cursor: pointer;
   z-index: 1;
   border-radius: 50%;

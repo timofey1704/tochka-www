@@ -1,11 +1,14 @@
+/* Общие стили для всех устройств */
+
+/* Стили для десктопа */
 .header-container {
   display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center; /* Центрирование по вертикали */
+  justify-content: center;
+  align-items: center;
 }
 
 .header-img {
-  margin-right: 20px; /* Добавляем отступ между логотипом и названием */
+  margin-right: 20px;
   width: 193px;
   height: 121px;
 }
@@ -14,12 +17,14 @@
   font-family: 'Post No Bills Jaffna SemiBold', sans-serif;
   font-weight: 600;
   font-size: 49px;
+  display: inline;
 }
 
 hr {
   background-color: #d0d0d0;
   border: none;
   height: 2px;
+  width: 80%;
 }
 
 .studio-name {
@@ -33,7 +38,6 @@ hr {
 }
 
 .studio-name-one {
-  margin: 10px;
   margin-left: 55px;
   margin-right: 35px;
   color: #8b0000;
@@ -59,15 +63,15 @@ nav {
 }
 
 .activeLink {
-  border-bottom: 2px solid green; /* Линия под текстом выбранной ссылки */
+  border-bottom: 2px solid #8b0000;
 }
 
 .Link:hover {
-  border-bottom: 2px solid black; /* Линия под текстом ссылки */
+  border-bottom: 2px solid black;
 }
 
 .Link:last-child {
-  margin-right: 0; /* Убираем отступ справа у последней ссылки */
+  margin-right: 0;
 }
 
 nav a {
@@ -78,5 +82,167 @@ nav a {
 }
 
 nav a:hover {
-  border-bottom: 2px solid black; /* Линия под текстом ссылки */
+  border-bottom: 2px solid black;
+}
+.burger-menu {
+  display: none;
+}
+
+/* mobile */
+@media screen and (max-width: 767px) {
+  .header-container {
+    justify-content: space-between;
+  }
+
+  .header-img {
+    margin-right: 10px;
+    margin-bottom: 0;
+    margin-left: 15px;
+    width: 100px;
+    height: auto;
+  }
+  .header-name {
+    display: none; /* Скрываем на мобильных устройствах */
+  }
+
+  .header-name {
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+  .studio-name {
+    flex-direction: column;
+    align-items: center;
+    font-size: 48px;
+    margin-top: 20px;
+  }
+
+  .studio-name-one {
+    margin: 5px 0;
+  }
+  .studio-name-two {
+    margin-left: 5px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Link,
+  .activeLink {
+    padding: 10px 20px;
+    margin: 5px 0;
+  }
+}
+
+.main-menu {
+  display: none;
+}
+
+/* Анимация открытия меню */
+.main-menu.open {
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Анимация закрытия меню */
+.main-menu.closed {
+  animation: slideOut 0.5s ease-in forwards;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+/* Стили для бургер-меню */
+.burger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  z-index: 1000;
+}
+
+.bar {
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+/* Стили для мини-попапа */
+.mini-popup {
+  position: fixed;
+  top: 0;
+  right: -200px; /* Скрыть попап за пределами экрана */
+  width: 200px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Поднять попап над остальными элементами */
+  transition: right 0.3s ease; /* Анимация выезда/выезда попапа */
+}
+
+.mini-popup nav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+/* Анимация открытия меню */
+/* Анимация открытия меню */
+.mini-popup.open {
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Анимация закрытия меню */
+.mini-popup.closed {
+  animation: slideOut 0.5s ease-in forwards;
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
 }

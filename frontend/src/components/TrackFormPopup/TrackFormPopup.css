@@ -23,14 +23,14 @@
 
 .popup-border {
   padding: 25px;
-  border: 2px solid #45a049;
+  border: 2px solid #8b0000;
   border-radius: 4px;
   position: relative;
 }
 
 .popup-title {
   font-family: 'Palanquin', sans-serif;
-  color: #45a049;
+  color: #8b0000;
   font-size: 0.8rem;
   position: absolute;
   top: -12px;
@@ -50,7 +50,7 @@
 }
 
 .popup button {
-  background-color: #4caf50;
+  background-color: #8b0000;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -61,7 +61,7 @@
 }
 
 .popup button:hover {
-  background-color: #45a049;
+  background-color: #5c0202;
 }
 
 .popup label {
@@ -92,8 +92,8 @@
   margin-bottom: 20px;
   font-family: 'Palanquin', sans-serif;
   font-size: 2rem;
-  position: relative; /* Добавляем позиционирование */
-  top: -20px; /* Поднимаем заголовок */
+  position: relative;
+  top: -20px;
 }
 
 .close-icon {

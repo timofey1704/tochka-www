@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import header_logo from '../../img/header_logo.png'
+import Header from '../Header/Header'
 import './Menu.css'
 
 const Menu = () => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
+
   return (
     <>
-      <div className="header-container">
-        <img src={header_logo} alt="logo" className="header-img" />
-        <div className="header-name">TOCHKA</div>
+      <Header />
+      <div className="burger-menu" onClick={toggleMenu}>
+        <div className="bar"></div>
+        <div className="bar"></div>
+        <div className="bar"></div>
       </div>
-      <nav>
+      <nav className={`main-menu ${isOpen ? 'open' : ''}`}>
         <NavLink
           className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
           to="."
@@ -31,7 +39,6 @@ const Menu = () => {
           Контакты / Цены
         </NavLink>
       </nav>
-
       <hr />
       <div className="studio-name">
         <div className="studio-name-one">TOCHKA</div>
