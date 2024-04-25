@@ -109,6 +109,7 @@ const TrackFormPopup = ({ onClose }) => {
               type="button"
               onClick={handleTelegramRequest}
               disabled={isLoadingViaAPI}
+              className="accept-request"
             >
               {isLoadingViaAPI ? (
                 <>
