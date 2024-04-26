@@ -1,9 +1,9 @@
-/* Common styles */
 .track-record-title,
 .track-record-description,
 .track-record-price,
 .udarnie-description,
 .show-more-button,
+.page-nav,
 .app-track-record button {
   font-family: 'Palanquin', sans-serif;
 }
@@ -22,6 +22,7 @@
   font-size: 21px;
   font-weight: 500;
   line-height: 33px;
+  color: #2f2f2f;
   margin: 30px auto;
   max-width: calc(100% - 30px);
 }
@@ -32,19 +33,38 @@
   gap: 10px;
   font-size: 21px;
   line-height: 32px;
-  color: #8b0000;
+  color: #2f2f2f;
   padding: 15px;
   margin: 25px auto;
   max-width: calc(100% - 30px);
+}
+.page-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  margin: 0 10px;
+}
+
+.page-nav a {
+  color: #2f2f2f;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.page-nav a:hover {
+  border-bottom: 2px solid black;
 }
 
 .Link,
 .activeLink {
   text-decoration: none;
+  color: #2f2f2f;
 }
 
 .activeLink {
   font-weight: bold;
+  color: #2f2f2f;
 }
 
 .horizontal-divider {
@@ -100,7 +120,7 @@
   text-align: justify;
   margin: 0 auto;
   max-width: 100%;
-  /* test */
+  color: #2f2f2f;
 }
 
 .udarnie-text {
@@ -117,7 +137,7 @@
 .show-more-button {
   background: none;
   border: none;
-  color: #8b0000;
+  color: #2f2f2f;
   cursor: pointer;
   text-decoration: underline;
   font-size: 18px;
@@ -204,4 +224,18 @@
   .udarnie-img img {
     max-width: 50%;
   }
+}
+.page-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+.page-nav a {
+  color: #2f2f2f;
+  margin: 0 10px;
+  text-decoration: none;
 }

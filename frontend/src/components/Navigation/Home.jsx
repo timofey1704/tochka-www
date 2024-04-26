@@ -9,7 +9,7 @@ import swiperImg3 from '../../img/swiperImg3.jpeg'
 import swiperImg4 from '../../img/swiperImg4.jpeg'
 import swiperImg9 from '../../img/swiperImg9.jpeg'
 import swiperImg10 from '../../img/swiperImg10.jpeg'
-import udarnie1 from '../../img/udarnie1.jpeg'
+import udarnie1 from '../../img/udarnie1.jpg'
 
 const images = [
   swiperImg1,
@@ -19,6 +19,8 @@ const images = [
   swiperImg9,
   swiperImg10,
 ]
+
+const imagesUdarnie = [udarnie1, swiperImg3, swiperImg2, swiperImg4]
 
 const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -32,8 +34,14 @@ const Home = () => {
 
   return (
     <>
+      <div className="page-nav">
+        <a href="#track-record">Запись трека</a>
+        <a href="#udarnie">Ударные</a>
+      </div>
       <div className="home-container">
-        <div className="track-record-title">Запись трека</div>
+        <div className="track-record-title" id="track-record">
+          Запись трека
+        </div>
         <div className="image-slider-container">
           <ImageSlider images={images} className="slide-image" />
         </div>
@@ -59,11 +67,11 @@ const Home = () => {
       </div>
 
       <div className="home-container">
-        <div className="track-record-title">
+        <div className="track-record-title" id="udarnie">
           Наша инструментальная база: Ударные
         </div>
-        <div className="udarnie-img">
-          <img src={udarnie1} alt="udarnie" />
+        <div className="image-slider-container">
+          <ImageSlider images={imagesUdarnie} className="slide-image" />
         </div>
         <div className="track-record-description">
           <span>
@@ -74,13 +82,13 @@ const Home = () => {
             представляет собой не просто коллекцию барабанов и тарелок, она -
             воплощение стиля и мощи.
           </span>
-          {/* Вставляем кнопку "Show More" в текст */}
+
           {!showMore && (
             <button onClick={toggleShowMore} className="show-more-button">
               <u>Узнать больше</u>
             </button>
           )}
-          {/* Дополнительный контент, который будет показан при нажатии на кнопку "Show More" */}
+
           {showMore && (
             <div className="additional-content">
               <p>
