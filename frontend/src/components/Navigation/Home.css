@@ -1,10 +1,6 @@
-.track-record-title,
-.track-record-description,
-.track-record-price,
-.udarnie-description,
-.show-more-button,
 .page-nav,
-.app-track-record button {
+.app-track-record button,
+.show-more-button {
   font-family: 'Palanquin', sans-serif;
 }
 
@@ -38,22 +34,12 @@
   margin: 25px auto;
   max-width: calc(100% - 30px);
 }
-.page-nav {
+.app-track-record,
+.track-record-price {
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  font-size: 21px;
-  margin: 0 10px;
-}
-
-.page-nav a {
-  color: #2f2f2f;
-  margin: 0 10px;
-  text-decoration: none;
-}
-.page-nav a:hover {
-  border-bottom: 2px solid black;
+  margin: 0 auto;
+  max-width: calc(100% - 30px);
 }
 
 .Link,
@@ -64,7 +50,6 @@
 
 .activeLink {
   font-weight: bold;
-  color: #2f2f2f;
 }
 
 .horizontal-divider {
@@ -74,14 +59,6 @@
   width: 80%;
   margin: 20px auto;
   max-width: 100%;
-}
-
-.app-track-record,
-.track-record-price {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: calc(100% - 30px);
 }
 
 .app-track-record button {
@@ -106,6 +83,29 @@
   max-width: 100%;
 }
 
+.page-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+  margin: 0 auto;
+  overflow-x: auto;
+  width: 70%;
+}
+
+.page-nav a {
+  color: #2f2f2f;
+  margin: 0 5px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.page-nav a:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .udarnie-container {
   display: flex;
   flex-direction: row;
@@ -123,17 +123,6 @@
   color: #2f2f2f;
 }
 
-.udarnie-text {
-  text-align: justify;
-}
-
-.udarnie-img img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
 .show-more-button {
   background: none;
   border: none;
@@ -147,7 +136,7 @@
   margin-top: 20px;
 }
 
-/* Mobile */
+/* mobile */
 @media screen and (max-width: 767px) {
   .studio-name {
     flex-direction: row;
@@ -218,24 +207,36 @@
     width: 75%;
     margin: 0 auto;
   }
+
+  .page-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    margin: 0 auto;
+    width: 100%;
+    overflow-x: hidden; /* Скрываем содержимое, выходящее за границы по горизонтали */
+  }
+  .page-nav a {
+    color: #2f2f2f;
+    flex-grow: 1;
+    white-space: nowrap;
+    margin: 0 auto;
+    text-decoration: none;
+    text-align: center;
+    width: 100px;
+  }
 }
 
-@media screen and (min-width: 768px) {
+/* tablet */
+@media screen and (min-width: 768px) and (max-width: 1199px) {
   .udarnie-img img {
     max-width: 50%;
   }
-}
-.page-nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  margin: 0 10px;
-}
 
-.page-nav a {
-  color: #2f2f2f;
-  margin: 0 10px;
-  text-decoration: none;
+  .page-nav {
+    font-size: 12px;
+    margin: 0 5px;
+  }
 }
