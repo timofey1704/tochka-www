@@ -1,6 +1,7 @@
 .page-nav,
 .app-track-record button,
-.show-more-button {
+.show-more-button,
+.track-record-description {
   font-family: 'Palanquin', sans-serif;
 }
 

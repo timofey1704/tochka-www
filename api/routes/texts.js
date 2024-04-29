@@ -15,10 +15,9 @@ router.get('/:id', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM texts WHERE id = $1', [id])
     if (result.rows.length === 0) {
-      // Если текст с указанным id не найден, возвращаем ошибку 404
       return res.status(404).json({ error: 'Текст не найден' })
     }
-    // Возвращаем найденный текст
+
     res.json(result.rows[0])
   } catch (error) {
     console.error('Ошибка выполнения запроса:', error)
