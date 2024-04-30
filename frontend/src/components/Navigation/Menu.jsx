@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Header from '../Header/Header'
 import './Menu.css'
@@ -6,12 +6,20 @@ import './Menu.css'
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false)
 
+  useEffect(() => {
+    const storedIsOpen = sessionStorage.getItem('menuIsOpen')
+    setIsOpen(storedIsOpen === 'true')
+  }, [])
+
   const toggleMenu = () => {
-    setIsOpen(!isOpen)
+    const newState = !isOpen
+    setIsOpen(newState)
+    sessionStorage.setItem('menuIsOpen', newState)
   }
 
   const closePopup = () => {
     setIsOpen(false)
+    sessionStorage.setItem('menuIsOpen', false)
   }
 
   return (
@@ -22,6 +30,7 @@ const Menu = () => {
         <div className="bar"></div>
         <div className="bar"></div>
       </div>
+
       <div className={`mini-popup ${isOpen ? 'open' : 'closed'}`}>
         <nav>
           <NavLink
