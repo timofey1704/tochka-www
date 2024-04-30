@@ -1,6 +1,3 @@
-/* Общие стили для всех устройств */
-
-/* Стили для десктопа */
 .header-container {
   display: flex;
   justify-content: center;
@@ -87,7 +84,38 @@ nav a:hover {
 .burger-menu {
   display: none;
 }
+.mini-popup {
+  position: fixed;
+  top: 0;
+  right: -30%; /* Попап скрыт за пределами экрана справа */
+  width: 30%; /* Ширина попапа равна 30% экрана */
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* Поднять попап над остальными элементами */
+  transition: right 0.3s ease; /* Анимация выезда/выезда попапа */
+  display: flex;
+  flex-direction: column;
+}
 
+.mini-popup nav {
+  padding: 20px;
+}
+
+/* Анимация открытия меню */
+.mini-popup.open {
+  right: 0; /* Показать попап справа */
+}
+
+/* Анимация закрытия меню */
+.mini-popup.closed {
+  right: -30%; /* Скрыть попап за пределами экрана справа */
+}
+
+/* Стили для бургер-меню */
+.burger-menu {
+  display: none;
+}
 /* mobile */
 @media screen and (max-width: 767px) {
   .header-container {
@@ -102,7 +130,7 @@ nav a:hover {
     height: auto;
   }
   .header-name {
-    display: none; /* Скрываем на мобильных устройствах */
+    display: none;
   }
 
   .header-name {
@@ -196,23 +224,14 @@ nav a:hover {
 
 /* Стили для мини-попапа */
 .mini-popup {
-  position: fixed;
-  top: 0;
-  right: -200px; /* Скрыть попап за пределами экрана */
-  width: 200px;
+  right: 0;
+  width: 100%;
   height: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 999; /* Поднять попап над остальными элементами */
-  transition: right 0.3s ease; /* Анимация выезда/выезда попапа */
 }
 
 .mini-popup nav {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
+  padding: 20px 0;
 }
-/* Анимация открытия меню */
 /* Анимация открытия меню */
 .mini-popup.open {
   display: flex;

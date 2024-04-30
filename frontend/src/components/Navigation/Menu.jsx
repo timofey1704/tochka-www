@@ -10,6 +10,10 @@ const Menu = () => {
     setIsOpen(!isOpen)
   }
 
+  const closePopup = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
       <Header />
@@ -18,27 +22,32 @@ const Menu = () => {
         <div className="bar"></div>
         <div className="bar"></div>
       </div>
-      <nav className={`main-menu ${isOpen ? 'open' : ''}`}>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-          to="."
-          end
-        >
-          Заказать трек
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-          to="photo"
-        >
-          Заказать фото/видеосъемку
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-          to="contacts"
-        >
-          Контакты / Цены
-        </NavLink>
-      </nav>
+      <div className={`mini-popup ${isOpen ? 'open' : 'closed'}`}>
+        <nav>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
+            to="."
+            end
+            onClick={closePopup}
+          >
+            Заказать трек
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
+            to="photo"
+            onClick={closePopup}
+          >
+            Заказать фото/видеосъемку
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
+            to="contacts"
+            onClick={closePopup}
+          >
+            Контакты / Цены
+          </NavLink>
+        </nav>
+      </div>
       <hr />
       <div className="studio-name">
         <div className="studio-name-one">TOCHKA</div>

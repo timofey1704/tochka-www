@@ -12,6 +12,7 @@
   text-align: center;
   margin: 20px auto;
   max-width: calc(100% - 30px);
+  padding: 20px;
 }
 
 .track-record-description {
@@ -21,7 +22,7 @@
   line-height: 33px;
   color: #2f2f2f;
   margin: 30px auto;
-  max-width: calc(100% - 30px);
+  max-width: calc(100% - 40px);
 }
 
 .track-record-price {
