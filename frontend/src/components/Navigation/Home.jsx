@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import TrackFormPopup from '../TrackFormPopup/TrackFormPopup'
-import TrackDescription from './HomeComponents/TrackDescription/TrackDescription'
 import SliderNav from './HomeComponents/SliderNav/SliderNav'
 import './Home.css'
 import ImageSlider from '../Sliders/ImageSlider'
@@ -27,6 +27,22 @@ const imagesUdarnie = [udarnie1, swiperImg3, swiperImg2, swiperImg4]
 const Home = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [showMore, setShowMore] = useState(false)
+  const [texts, setTexts] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:4000/api/texts')
+      .then((response) => {
+        setTexts(response.data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error('Ошибка загрузки текстов:', error)
+        setLoading(false)
+      })
+  }, [])
+
   const openPopup = () => {
     setIsPopupOpen(true)
   }
@@ -37,67 +53,81 @@ const Home = () => {
   return (
     <>
       <SliderNav />
-      <div className="home-container">
-        <div className="track-record-title" id="track-record">
-          Запись трека
-        </div>
-        <div className="image-slider-container">
-          <ImageSlider images={images} className="slide-image" />
-        </div>
-        <div className="track-record-description">
-          <TrackDescription id={2} />
-        </div>
-        <div className="app-track-record">
-          <button onClick={openPopup}>Записаться!</button>
-        </div>
-        <div className="track-record-price">
-          <NavLink to="/contacts">Стоимость</NavLink> от 400р / 2 часа
-        </div>
 
-        <hr className="horizontal-divider" />
-        {isPopupOpen && (
-          <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
+      <>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="home-container">
+            <div className="track-record-title">Запись трека</div>
+            <div className="image-slider-container">
+              <ImageSlider images={images} className="slide-image" />
+            </div>
+            <div className="track-record-description">
+              <p>{texts.length > 0 && texts[8].text}</p>
+            </div>
+            <div className="app-track-record">
+              <button onClick={openPopup}>Записаться!</button>
+            </div>
+            <div className="track-record-price">
+              <NavLink to="/contacts">Стоимость</NavLink> от 400р / 2 часа
+            </div>
+            <hr className="horizontal-divider" />
+            {isPopupOpen && (
+              <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
+            )}
+          </div>
         )}
-      </div>
+      </>
 
-      <div className="home-container">
-        <div className="track-record-title" id="udarnie">
-          Наша инструментальная база: Ударные
-        </div>
-        <div className="image-slider-container">
-          <ImageSlider images={imagesUdarnie} className="slide-image" />
-        </div>
-        <div className="track-record-description">
-          <TrackDescription id={3} />
+      <>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <div className="home-container">
+            <div className="track-record-title" id="udarnie">
+              Наша инструментальная база: Ударные
+            </div>
+            <div className="image-slider-container">
+              <ImageSlider images={imagesUdarnie} className="slide-image" />
+            </div>
+            <div className="track-record-description">
+              <p>{texts.length > 0 && texts[7].text}</p>
 
-          {!showMore && (
-            <button onClick={toggleShowMore} className="show-more-button">
-              <u>Узнать больше</u>
-            </button>
-          )}
-
-          {showMore && (
-            <div className="additional-content">
-              <TrackDescription id={4} />
-              <TrackDescription id={5} />
-
-              {showMore && (
+              {!showMore && (
                 <button onClick={toggleShowMore} className="show-more-button">
-                  <u>Скрыть текст</u>
+                  <u>Узнать больше</u>
                 </button>
               )}
-            </div>
-          )}
-        </div>
 
-        <div className="app-track-record">
-          <button onClick={openPopup}>Записаться!</button>
-        </div>
-        <div className="track-record-price">
-          <NavLink to="/contacts">Стоимость</NavLink> допа от 100р / 2 часа
-        </div>
-      </div>
-      <hr />
+              {showMore && (
+                <div className="additional-content">
+                  <p>{texts.length > 0 && texts[0].text}</p>
+                  <p>{texts.length > 0 && texts[1].text}</p>
+
+                  {showMore && (
+                    <button
+                      onClick={toggleShowMore}
+                      className="show-more-button"
+                    >
+                      <u>Скрыть текст</u>
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div className="app-track-record">
+              <button onClick={openPopup}>Записаться!</button>
+            </div>
+            <div className="track-record-price">
+              <NavLink to="/contacts">Стоимость</NavLink> допа от 100р / 2 часа
+            </div>
+          </div>
+        )}
+        <hr />
+      </>
+
       <div className="home-container">
         <div className="track-record-title" id="sintesator">
           Наша инструментальная база: Синтезаторы
@@ -106,7 +136,7 @@ const Home = () => {
           <ImageSlider images={images} className="slide-image" />
         </div>
         <div className="track-record-description">
-          <TrackDescription id={6} />
+          <p>{texts.length > 0 && texts[2].text}</p>
           {!showMore && (
             <button onClick={toggleShowMore} className="show-more-button">
               <u>Узнать больше</u>
@@ -115,9 +145,9 @@ const Home = () => {
 
           {showMore && (
             <div className="additional-content">
-              <TrackDescription id={7} />
-              <TrackDescription id={8} />
-              <TrackDescription id={9} />
+              <p>{texts.length > 0 && texts[3].text}</p>
+              <p>{texts.length > 0 && texts[4].text}</p>
+              <p>{texts.length > 0 && texts[5].text}</p>
               {showMore && (
                 <button onClick={toggleShowMore} className="show-more-button">
                   <u>Скрыть текст</u>
@@ -147,7 +177,7 @@ const Home = () => {
           <ImageSlider images={images} className="slide-image" />
         </div>
         <div className="track-record-description">
-          <TrackDescription id={10} />
+          <p>{texts.length > 0 && texts[6].text}</p>
           {!showMore && (
             <button onClick={toggleShowMore} className="show-more-button">
               <u>Узнать больше</u>
@@ -156,9 +186,9 @@ const Home = () => {
 
           {showMore && (
             <div className="additional-content">
-              <TrackDescription id={11} />
-              <TrackDescription id={12} />
-              <TrackDescription id={13} />
+              <p>{texts.length > 0 && texts[9].text}</p>
+              <p>{texts.length > 0 && texts[10].text}</p>
+              <p>{texts.length > 0 && texts[11].text}</p>
               {showMore && (
                 <button onClick={toggleShowMore} className="show-more-button">
                   <u>Скрыть текст</u>
@@ -188,7 +218,7 @@ const Home = () => {
           <ImageSlider images={images} className="slide-image" />
         </div>
         <div className="track-record-description">
-          <TrackDescription id={14} />
+          <p>{texts.length > 0 && texts[11].text}</p>
           {!showMore && (
             <button onClick={toggleShowMore} className="show-more-button">
               <u>Узнать больше</u>
@@ -197,9 +227,9 @@ const Home = () => {
 
           {showMore && (
             <div className="additional-content">
-              <TrackDescription id={15} />
-              <TrackDescription id={16} />
-              <TrackDescription id={17} />
+              <p>{texts.length > 0 && texts[12].text}</p>
+              <p>{texts.length > 0 && texts[13].text}</p>
+              <p>{texts.length > 0 && texts[14].text}</p>
               {showMore && (
                 <button onClick={toggleShowMore} className="show-more-button">
                   <u>Скрыть текст</u>

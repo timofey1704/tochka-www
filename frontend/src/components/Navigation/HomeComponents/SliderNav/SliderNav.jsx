@@ -3,7 +3,6 @@ import { Link } from 'react-scroll'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-// import { animateScroll as scroll } from 'react-scroll'
 
 const SliderNav = () => {
   const settings = {
@@ -16,7 +15,7 @@ const SliderNav = () => {
   }
 
   return (
-    <div>
+    <>
       <Slider {...settings} className="page-nav">
         <Link
           to="track-record"
@@ -44,7 +43,7 @@ const SliderNav = () => {
           Кардан
         </Link>
       </Slider>
-    </div>
+    </>
   )
 }
 
