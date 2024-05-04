@@ -53,7 +53,7 @@ const Menu = () => {
             to="contacts"
             onClick={closePopup}
           >
-            Контакты / Цены
+            О нас
           </NavLink>
         </nav>
       </div>

@@ -1,15 +1,13 @@
 import React from 'react'
 import './Contacts.css'
+import About from './ContactsComponents/About'
 
 const Contacts = () => {
   return (
     <>
-      <h2>Как с нами связаться?</h2>
-      <div className="address-name">
-        Мы находимся по адресу Гаражная улица, 2
+      <div className="about">
+        <About />
       </div>
-
-      <div className="map"></div>
     </>
   )
 }

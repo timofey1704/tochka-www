@@ -19,6 +19,7 @@ hr {
   border: none;
   height: 2px;
   width: 80%;
+  margin: 0 auto;
 }
 .studio-name {
   display: flex;
@@ -27,7 +28,7 @@ hr {
   justify-content: center;
   font-family: 'Palanquin', sans-serif;
   font-weight: 700px;
-  font-size: 96px;
+  font-size: 75px;
 }
 .studio-name-one {
   margin-left: 55px;
