@@ -39,21 +39,21 @@ const Menu = () => {
             end
             onClick={closePopup}
           >
-            Заказать трек
+            О нас
           </NavLink>
-          <NavLink
+          {/* <NavLink
             className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
             to="photo"
             onClick={closePopup}
           >
             Заказать фото/видеосъемку
-          </NavLink>
+          </NavLink> */}
           <NavLink
             className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-            to="contacts"
+            to="track-record"
             onClick={closePopup}
           >
-            О нас
+            Записать трек
           </NavLink>
         </nav>
       </div>
