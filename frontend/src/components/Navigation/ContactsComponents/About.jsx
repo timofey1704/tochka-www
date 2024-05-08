@@ -36,7 +36,7 @@ export default function About() {
                 Создавай прекрасное
               </h2>
               <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Добро пожаловать в нашу студию звукозаписи
+                Добро пожаловать в наше творческое пространство
               </p>
               <p className="mt-6 text-lg leading-8 text-gray-600">
                 В нашей студии звукозаписи каждая нота находит свой путь к
