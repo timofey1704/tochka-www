@@ -3,14 +3,12 @@ const router = express.Router()
 const { Pool } = require('pg')
 
 const pool = new Pool({
-  user: 'admin',
-  host: 'localhost',
-  database: 'postgres',
-  password: 'qweasdZxCgit',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 })
-
-console.log('test')
 
 router.get('/', async (req, res) => {
   try {

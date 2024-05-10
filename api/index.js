@@ -4,6 +4,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const textsRoute = require('./routes/texts')
 const sendMessageRoute = require('./routes/sendMessage')
+const loginRoute = require('./routes/login')
 
 const app = express()
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json())
 
 app.use('/api/texts', textsRoute)
 app.use('/send-message', sendMessageRoute)
+app.use('/login', loginRoute)
 
 const port = process.env.PORT || 4000
 app.listen(port, () => {
