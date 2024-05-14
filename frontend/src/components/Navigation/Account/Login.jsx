@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -16,11 +17,13 @@ const Login = () => {
       })
 
       if (responce.status === 200) {
+        toast.success('Вход выполнен успешно!')
         navigate('/dashboard')
       } else {
         console.error(responce.data.message)
       }
     } catch (error) {
+      toast.error('Ошибка входа.', { position: 'bottom-center' })
       console.error('Ошибка в авторизации', error)
     }
   }
@@ -50,7 +53,7 @@ const Login = () => {
                   type="username"
                   autoComplete="username"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm pl-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-dark-red sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 shadow-sm pl-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-dark-red sm:text-sm sm:leading-6"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -81,7 +84,7 @@ const Login = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm pl-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-dark-red sm:text-sm sm:leading-6"
+                  className="block w-full rounded-md border-0 py-1.5 shadow-sm pl-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-dark-red sm:text-sm sm:leading-6"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

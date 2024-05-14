@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import { FaSpinner } from 'react-icons/fa'
 import InputMask from 'react-input-mask'
-
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  fetchTrack,
-  selectIsLoadingViaAPI,
-} from '../../redux/slices/tracksSlice'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-hot-toast'
+import { fetchTrack } from '../../redux/slices/tracksSlice'
 import { setError } from '../../redux/slices/errorSlice'
 import './TrackFormPopup.css'
 
@@ -14,20 +10,17 @@ const TrackFormPopup = ({ onClose }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [phone, setPhone] = useState('')
-  // eslint-disable-next-line
-  const [isLoading, setIsLoading] = useState(false)
   const [isAuthorEmpty, setIsAuthorEmpty] = useState(true)
-  const isLoadingViaAPI = useSelector(selectIsLoadingViaAPI)
   // eslint-disable-next-line
   const [isPhoneEmpty, setIsPhoneEmpty] = useState(true)
   const dispatch = useDispatch()
 
   const handleTelegramRequest = async () => {
     if (!title || !author || !phone) {
-      dispatch(setError('Поля не могут быть пустыми!'))
+      toast.error('Поля не могут быть пустыми!', { icon: '❗️' })
       return
     }
-    setIsLoading(true)
+
     const trackDetails = {
       message: `Название трека: ${title}, Автор: ${author}, Контактный номер: +${phone}`,
     }
@@ -38,11 +31,11 @@ const TrackFormPopup = ({ onClose }) => {
           data: trackDetails,
         })
       )
-      setIsLoading(false)
       onClose()
+      toast.success('Заявка успешно отправлена!')
     } catch (error) {
       console.error('Ошибка при отправке данных:', error)
-      setIsLoading(false)
+
       dispatch(setError('Произошла ошибка при отправке данных!'))
     }
   }
@@ -108,17 +101,9 @@ const TrackFormPopup = ({ onClose }) => {
             <button
               type="button"
               onClick={handleTelegramRequest}
-              disabled={isLoadingViaAPI}
               className="accept-request"
             >
-              {isLoadingViaAPI ? (
-                <>
-                  <span>Отправка...</span>
-                  <FaSpinner className="spinner" />
-                </>
-              ) : (
-                'Написать нам!'
-              )}
+              Написать нам!
             </button>
           </form>
           <span className="close-icon" onClick={onClose}>
