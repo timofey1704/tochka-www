@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -8,9 +9,20 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    // Здесь выполняется логика отправки запроса на сервер для аутентификации
-    // Если аутентификация успешна, выполните редирект
-    navigate('/dashboard') // Замените '/dashboard' на путь куда нужно редиректить после успешной аутентификации
+    try {
+      const responce = await axios.post('http://localhost:4000/login', {
+        username,
+        password,
+      })
+
+      if (responce.status === 200) {
+        navigate('/dashboard')
+      } else {
+        console.error(responce.data.message)
+      }
+    } catch (error) {
+      console.error('Ошибка в авторизации', error)
+    }
   }
 
   return (

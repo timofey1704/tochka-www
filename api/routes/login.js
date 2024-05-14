@@ -11,7 +11,7 @@ const pool = new Pool({
 })
 
 // Роут для обработки запроса на вход пользователя
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
   const { username, password } = req.body
 
   try {

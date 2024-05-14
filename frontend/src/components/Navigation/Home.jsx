@@ -87,7 +87,7 @@ const Home = () => {
                 <button onClick={openPopup}>Записаться!</button>
               </div>
               <div className="track-record-price">
-                <NavLink to="/contacts">Стоимость</NavLink> от 400р / 2 часа
+                <NavLink to="/price">Стоимость</NavLink> от 400р / 2 часа
               </div>
               <hr className="horizontal-divider" />
               {isPopupOpen && (
@@ -138,8 +138,7 @@ const Home = () => {
                 <button onClick={openPopup}>Записаться!</button>
               </div>
               <div className="track-record-price">
-                <NavLink to="/contacts">Стоимость</NavLink> допа от 100р / 2
-                часа
+                <NavLink to="/price">Стоимость</NavLink> допа от 100р / 2 часа
               </div>
             </div>
           )}
@@ -178,7 +177,7 @@ const Home = () => {
             <button onClick={openPopup}>Записаться!</button>
           </div>
           <div className="track-record-price">
-            <NavLink to="/contacts">Стоимость</NavLink>допа от 100р / 2 часа
+            <NavLink to="/price">Стоимость</NavLink>допа от 100р / 2 часа
           </div>
 
           <hr className="horizontal-divider" />
@@ -219,7 +218,7 @@ const Home = () => {
             <button onClick={openPopup}>Записаться!</button>
           </div>
           <div className="track-record-price">
-            <NavLink to="/contacts">Стоимость</NavLink>допа от 100р / 2 часа
+            <NavLink to="/price">Стоимость</NavLink>допа от 100р / 2 часа
           </div>
 
           <hr className="horizontal-divider" />
@@ -260,7 +259,7 @@ const Home = () => {
             <button onClick={openPopup}>Записаться!</button>
           </div>
           <div className="track-record-price">
-            <NavLink to="/contacts">Стоимость</NavLink>допа от 50р / 2 часа
+            <NavLink to="/price">Стоимость</NavLink>допа от 50р / 2 часа
           </div>
 
           <hr className="horizontal-divider" />
