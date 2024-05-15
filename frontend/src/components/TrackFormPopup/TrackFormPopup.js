@@ -3,7 +3,6 @@ import InputMask from 'react-input-mask'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { fetchTrack } from '../../redux/slices/tracksSlice'
-import { setError } from '../../redux/slices/errorSlice'
 import './TrackFormPopup.css'
 
 const TrackFormPopup = ({ onClose }) => {
@@ -36,7 +35,7 @@ const TrackFormPopup = ({ onClose }) => {
     } catch (error) {
       console.error('Ошибка при отправке данных:', error)
 
-      dispatch(setError('Произошла ошибка при отправке данных!'))
+      toast.error('Произошла ошибка при отправке данных')
     }
   }
 

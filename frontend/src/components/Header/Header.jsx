@@ -4,12 +4,12 @@ import './Header.css'
 
 const Header = () => {
   return (
-    <div className="header-container">
+    <header className="header-container">
       <img src={header_logo} alt="logo" className="header-img" />
       <div className="header-name">
         <h1>TOCHKA</h1>
       </div>
-    </div>
+    </header>
   )
 }
 

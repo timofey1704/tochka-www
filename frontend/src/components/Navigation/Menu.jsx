@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import Header from '../Header/Header'
+import AdminHeader from '../Header/AdminHeader'
 import './Menu.css'
 
-const Menu = () => {
+const Menu = ({ isAdminRoute }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const Menu = () => {
 
   return (
     <>
-      <Header />
+      {isAdminRoute ? <AdminHeader /> : <Header />}
       <div className="burger-menu" onClick={toggleMenu}>
         <div className="bar"></div>
         <div className="bar"></div>
@@ -41,13 +42,7 @@ const Menu = () => {
           >
             О нас
           </NavLink>
-          {/* <NavLink
-            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-            to="photo"
-            onClick={closePopup}
-          >
-            Заказать фото/видеосъемку
-          </NavLink> */}
+
           <NavLink
             className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
             to="track-record"
