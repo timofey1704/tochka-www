@@ -17,6 +17,7 @@ const Login = () => {
       })
 
       if (responce.status === 200) {
+        localStorage.setItem('token', responce.data.token)
         toast.success('Вход выполнен успешно!')
         navigate('/dashboard')
       } else {
@@ -94,7 +95,7 @@ const Login = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-dark-red px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
+                className="flex w-full justify-center rounded-md bg-red-dark-red px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 "
               >
                 Войти
               </button>

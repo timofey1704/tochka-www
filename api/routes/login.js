@@ -1,4 +1,5 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const router = express.Router()
 const { Pool } = require('pg')
 
@@ -21,11 +22,20 @@ router.post('/', async (req, res) => {
     const result = await pool.query(query, [username, password])
 
     if (result.rows.length === 1) {
-      // Если найден пользователь с такими данными, отправляем успех
+      // Если найден пользователь с такими данными, генерируем токен
+      const user = result.rows[0]
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      )
+
+      // Отправляем токен вместе с успешным ответом аутентификации
       res.status(200).json({
         success: true,
         message: 'Авторизация успешна',
-        user: result.rows[0],
+        token: token,
+        user: user,
       })
     } else {
       // Если пользователь не найден, отправляем ошибку

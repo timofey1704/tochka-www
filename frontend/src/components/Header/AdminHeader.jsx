@@ -1,22 +1,19 @@
 import React from 'react'
 
 const AdminHeader = () => (
-  <header className="bg-gray-800 text-white shadow-md">
-    <div className="container mx-auto flex items-center justify-between p-4">
-      <div className="flex items-center">
-        <h1 className="text-xl text-dark-red font-bold">Admin Dashboard</h1>
-      </div>
-      <nav className="flex space-x-4">
-        <a href="/" className="hover:text-gray-400">
+  <header className="bg-blue-400 text-white shadow-md">
+    <div className="container mx-auto flex items-center justify-between">
+      <nav className="flex space-x-4 items-center pt-5">
+        <a href="/" className=" text-white hover:text-red-600">
           Home
         </a>
-        <a href="/profile" className="hover:text-gray-400">
+        <a href="/profile" className="text-white ">
           Profile
         </a>
-        <a href="/settings" className="hover:text-gray-400">
+        <a href="/settings" className="text-white">
           Settings
         </a>
-        <a href="/logout" className="hover:text-gray-400">
+        <a href="/logout" className="text-white ">
           Logout
         </a>
       </nav>

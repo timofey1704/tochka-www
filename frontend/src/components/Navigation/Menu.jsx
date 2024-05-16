@@ -1,59 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react'
 import Header from '../Header/Header'
 import AdminHeader from '../Header/AdminHeader'
 import './Menu.css'
 
 const Menu = ({ isAdminRoute }) => {
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    const storedIsOpen = sessionStorage.getItem('menuIsOpen')
-    setIsOpen(storedIsOpen === 'true')
-  }, [])
-
-  const toggleMenu = () => {
-    const newState = !isOpen
-    setIsOpen(newState)
-    sessionStorage.setItem('menuIsOpen', newState)
-  }
-
-  const closePopup = () => {
-    setIsOpen(false)
-    sessionStorage.setItem('menuIsOpen', false)
-  }
-
-  return (
-    <>
-      {isAdminRoute ? <AdminHeader /> : <Header />}
-      <div className="burger-menu" onClick={toggleMenu}>
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
-      </div>
-
-      <div className={`mini-popup ${isOpen ? 'open' : 'closed'}`}>
-        <nav>
-          <NavLink
-            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-            to="."
-            end
-            onClick={closePopup}
-          >
-            О нас
-          </NavLink>
-
-          <NavLink
-            className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-            to="track-record"
-            onClick={closePopup}
-          >
-            Записать трек
-          </NavLink>
-        </nav>
-      </div>
-    </>
-  )
+  return <>{isAdminRoute ? <AdminHeader /> : <Header />}</>
 }
 
 export default Menu
