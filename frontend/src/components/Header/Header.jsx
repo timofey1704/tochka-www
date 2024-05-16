@@ -2,7 +2,6 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import header_logo from '../../img/header_logo.png'
-import './Header.css'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)

@@ -2,7 +2,16 @@
 module.exports = {
   content: ['./src/components/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        custom: [
+          '"Palanquin"',
+          'sans-serif',
+          '"Post No Bills Jaffna"',
+          'sans-serif',
+        ],
+      },
+    },
     colors: {
       white: '#ffffff',
       black: '#000000',
