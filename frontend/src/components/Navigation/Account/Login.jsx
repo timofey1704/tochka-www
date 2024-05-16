@@ -24,7 +24,7 @@ const Login = () => {
         console.error(responce.data.message)
       }
     } catch (error) {
-      toast.error('Ошибка входа.', { position: 'bottom-center' })
+      toast.error('Неверный логин или пароль.', { position: 'bottom-center' })
       console.error('Ошибка в авторизации', error)
     }
   }

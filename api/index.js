@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const textsRoute = require('./routes/texts')
 const sendMessageRoute = require('./routes/sendMessage')
 const loginRoute = require('./routes/login')
+const clientsRouter = require('./routes/clients')
 const authenticateToken = require('./middlewares/authMiddleware')
 
 const app = express()
@@ -20,6 +21,7 @@ app.get('/dashboard', authenticateToken, (req, res) => {
     .status(200)
     .json({ success: true, message: 'Доступ разрешен', user: req.user })
 })
+app.use('/track-record', clientsRouter)
 
 const port = process.env.PORT || 4000
 app.listen(port, () => {
