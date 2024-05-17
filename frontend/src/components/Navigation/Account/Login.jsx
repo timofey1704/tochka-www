@@ -1,30 +1,46 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { toast } from 'react-hot-toast'
+import { login } from '../../../redux/slices/authSlice'
+import { showSuccess, showError } from '../../../redux/slices/notificationSlice'
 
 const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const responce = await axios.post('http://localhost:4000/login', {
+      const response = await axios.post('http://localhost:4000/login', {
         username,
         password,
       })
 
-      if (responce.status === 200) {
-        localStorage.setItem('token', responce.data.token)
-        toast.success('Вход выполнен успешно!')
+      if (response.status === 200) {
+        const { token, user } = response.data
+        localStorage.setItem('token', token)
+        dispatch(login({ token, user }))
+        dispatch(
+          showSuccess({
+            message: 'Вход выполнен успешно!',
+            position: 'top-center',
+          })
+        )
         navigate('/dashboard')
       } else {
-        console.error(responce.data.message)
+        console.error(response.data.message)
       }
     } catch (error) {
-      toast.error('Неверный логин или пароль.', { position: 'bottom-center' })
+      // toast.error('Неверный логин или пароль.', { position: 'bottom-center' })
+      dispatch(
+        showError({
+          message: 'Неверный логин или пароль!',
+          position: 'bottom-center',
+        })
+      )
       console.error('Ошибка в авторизации', error)
     }
   }

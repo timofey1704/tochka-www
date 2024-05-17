@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { logout } from '../../redux/slices/authSlice'
 
 const AdminHeader = () => {
   const [activeLink, setActiveLink] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link)
   }
-
+  const handleLogout = () => {
+    dispatch(logout())
+    navigate('/login')
+  }
   return (
     <header className="bg-blue-400 text-white shadow-md">
       <div className="container mx-auto flex items-center justify-between">
@@ -45,7 +52,7 @@ const AdminHeader = () => {
             className={`text-white ${
               activeLink === '/login' ? 'underline' : ''
             }`}
-            onClick={() => handleSetActiveLink('/login')}
+            onClick={handleLogout}
           >
             Выйти из системы
           </NavLink>

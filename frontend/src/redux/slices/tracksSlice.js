@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { setError } from './errorSlice'
+import { showError } from './notificationSlice'
 
 const initialState = {
   tracks: [],
@@ -14,7 +14,7 @@ export const fetchTrack = createAsyncThunk(
       const res = await axios.post(url, data)
       return res.data
     } catch (error) {
-      thunkAPI.dispatch(setError(error.message))
+      thunkAPI.dispatch(showError(error.message))
       return thunkAPI.rejectWithValue(error.response.data)
     }
   }

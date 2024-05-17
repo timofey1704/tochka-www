@@ -3,7 +3,9 @@ import InputMask from 'react-input-mask'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { fetchTrack } from '../../redux/slices/tracksSlice'
+import { showSuccess, showError } from '../../redux/slices/notificationSlice'
 import './TrackFormPopup.css'
+
 const TrackFormPopup = ({ onClose }) => {
   const [telegram_id, setTelegram_id] = useState('')
   const [phone, setPhone] = useState('')
@@ -45,11 +47,21 @@ const TrackFormPopup = ({ onClose }) => {
         })
       )
       onClose()
-      toast.success('Заявка успешно отправлена!')
+      dispatch(
+        showSuccess({
+          message: 'Заявка успешно отравлена!',
+          position: 'top-center',
+        })
+      )
     } catch (error) {
       console.error('Ошибка при отправке данных:', error)
 
-      toast.error('Произошла ошибка при отправке данных')
+      dispatch(
+        showError({
+          message: 'Ошибка при отправке данных!',
+          position: 'top-center',
+        })
+      )
     }
   }
 
