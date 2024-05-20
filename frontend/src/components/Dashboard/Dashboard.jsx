@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="flex min-h-0 flex-1 flex-col font-custom px-6 py-12 lg:px-8">
-        {/* <h1 className="text-center text-3xl">Точка - панель управления</h1> */}
+        <h1 className="text-center text-3xl">Точка - панель управления</h1>
         <div className="flex justify-between text-xl py-10 ">
           <span className="text-left">
             Предстоящих записей на этой неделе: N

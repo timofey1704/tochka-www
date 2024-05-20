@@ -20,7 +20,7 @@ const AdminHeader = () => {
       <div className="container mx-auto flex items-center justify-between">
         <nav className="flex space-x-4 items-center pt-5">
           <NavLink
-            to="/dashboard"
+            to="/dashboard/home"
             exact="true"
             className={`text-white ${
               activeLink === '/dashboard' ? 'underline' : ''
@@ -30,7 +30,7 @@ const AdminHeader = () => {
             Главная
           </NavLink>
           <NavLink
-            to="/employees"
+            to="/dashboard/employees"
             className={`text-white ${
               activeLink === '/employees' ? 'underline' : ''
             }`}
@@ -39,7 +39,7 @@ const AdminHeader = () => {
             Сотрудники
           </NavLink>
           <NavLink
-            to="/clients"
+            to="/dashboard/clients"
             className={`text-white ${
               activeLink === '/clients' ? 'underline' : ''
             }`}

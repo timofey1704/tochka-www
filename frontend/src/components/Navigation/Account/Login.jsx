@@ -29,7 +29,7 @@ const Login = () => {
             position: 'top-center',
           })
         )
-        navigate('/dashboard')
+        navigate('/dashboard/home')
       } else {
         console.error(response.data.message)
       }

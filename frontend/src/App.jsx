@@ -8,6 +8,8 @@ import Contacts from './components/Navigation/Contacts'
 import NotFound from './components/Navigation/NotFound'
 import Login from './components/Navigation/Account/Login'
 import Dashboard from './components/Dashboard/Dashboard'
+import Employees from './components/Dashboard/Employees'
+import Clients from './components/Dashboard/Clients'
 
 function App() {
   return (
@@ -23,7 +25,9 @@ function App() {
               <Route index element={<Contacts />} />
               <Route path="login" element={<Login />} />
               <Route path="password-recovery" element={<PasswordRecovery />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/home" element={<Dashboard />} />
+              <Route path="/dashboard/employees" element={<Employees />} />
+              <Route path="dashboard/clients" element={<Clients />} />
               <Route path="track-record" element={<Home />} />
               <Route path="*" element={<NotFound />} />
             </Route>

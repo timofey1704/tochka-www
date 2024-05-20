@@ -17,7 +17,7 @@ app.use(bodyParser.json())
 app.use('/api/texts', textsRoute)
 app.use('/send-message', sendMessageRoute)
 app.use('/login', loginRoute)
-app.use('/track-record', clientsRouter)
+app.use('/track-record', authenticateToken, clientsRouter)
 app.use('/dashboard', authenticateToken, dashboardRouter)
 
 const port = process.env.PORT || 4000
