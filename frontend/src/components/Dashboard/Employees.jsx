@@ -22,7 +22,7 @@ const Employees = () => {
   const handleStatusChange = async (id, isActive) => {
     const token = localStorage.getItem('token')
     try {
-      // Асинхронный запрос для изменения статуса пользователя
+      // асинхронный запрос для изменения статуса пользователя
       await axios.put(
         `http://localhost:4000/employees/${id}/status`,
         { isActive },
@@ -31,7 +31,7 @@ const Employees = () => {
         }
       )
 
-      // Обновление состояния users
+      // обновление состояния users
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user.user_id === id ? { ...user, is_active: isActive } : user
@@ -45,7 +45,7 @@ const Employees = () => {
   return (
     <div className="flex min-h-0 flex-1 flex-col font-custom px-6 py-6 lg:px-4">
       <div className="container mx-auto">
-        <h2 className="text-xl font-bold mb-4">Список сотрудников студии</h2>
+        <h2 className="text-xl font-bold mb-4">Список сотрудников студии:</h2>
         {users.length === 0 ? (
           <div className="text-xl text-center mr-9 font-bold">
             Нет сотрудников
@@ -88,6 +88,9 @@ const Employees = () => {
             </tbody>
           </table>
         )}
+        <div className="min-w-full text-right py-3 text-blue-about-text hover:underline">
+          Выдать доступ сотруднику
+        </div>
       </div>
     </div>
   )

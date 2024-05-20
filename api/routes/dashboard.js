@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Pool } = require('pg')
-const authenticateToken = require('../middlewares/authMiddleware') // Импорт middleware
+const authenticateToken = require('../middlewares/authMiddleware')
 
 const pool = new Pool({
   user: process.env.DB_USER,

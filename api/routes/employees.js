@@ -30,9 +30,6 @@ router.put('/:id/status', authenticateToken, async (req, res) => {
   const userId = req.params.id
   const { isActive } = req.body
 
-  console.log('Received userId:', userId)
-  console.log('Received isActive:', isActive)
-
   if (typeof isActive !== 'boolean') {
     return res.status(400).json({ error: 'Invalid isActive value' })
   }

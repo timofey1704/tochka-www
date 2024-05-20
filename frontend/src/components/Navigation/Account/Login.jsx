@@ -19,7 +19,7 @@ const Login = () => {
         password,
       })
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.success) {
         const { token, user } = response.data
         localStorage.setItem('token', token)
         dispatch(login({ token, user }))
@@ -33,8 +33,15 @@ const Login = () => {
       } else {
         console.error(response.data.message)
       }
+      if (response.data.reason === 'USER_NOT_ACTIVE') {
+        dispatch(
+          showError({
+            message: 'Пользователь не активен!',
+            position: 'bottom-center',
+          })
+        )
+      }
     } catch (error) {
-      // toast.error('Неверный логин или пароль.', { position: 'bottom-center' })
       dispatch(
         showError({
           message: 'Неверный логин или пароль!',

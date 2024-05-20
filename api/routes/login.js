@@ -11,26 +11,35 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
-// Роут для обработки запроса на вход пользователя
 router.post('/', async (req, res) => {
   const { username, password } = req.body
 
   try {
-    // Выполняем запрос к базе данных для проверки логина и пароля
+    // выполняем запрос к базе данных для проверки логина и пароля
     const query =
       'SELECT * FROM users WHERE username = $1 AND password = $2 LIMIT 1'
     const result = await pool.query(query, [username, password])
 
     if (result.rows.length === 1) {
-      // Если найден пользователь с такими данными, генерируем токен
+      // если найден пользователь с такими данными, проверяем доступы
       const user = result.rows[0]
+
+      if (!user.is_active) {
+        return res.status(200).json({
+          success: false,
+          message: 'Пользователь неактивен',
+          reason: 'USER_NOT_ACTIVE',
+        })
+      }
+
+      // если пользователь активен, генерируем токен
       const token = jwt.sign(
         { id: user.id, username: user.username },
         process.env.JWT_SECRET,
         { expiresIn: '1h' }
       )
 
-      // Отправляем токен вместе с успешным ответом аутентификации
+      // отправляем токен вместе с успешным ответом аутентификации
       res.status(200).json({
         success: true,
         message: 'Авторизация успешна',
@@ -38,7 +47,7 @@ router.post('/', async (req, res) => {
         user: user,
       })
     } else {
-      // Если пользователь не найден, отправляем ошибку
+      // если пользователь не найден, отправляем ошибку
       res
         .status(401)
         .json({ success: false, message: 'Неверный логин или пароль' })
