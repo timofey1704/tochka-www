@@ -46,7 +46,7 @@ router.get('/prev-week', authenticateToken, async (req, res) => {
     client.release()
 
     if (result.rows.length === 0) {
-      return res.status(200).json([]) // Возвращаем пустой массив если записей в базе нет
+      return res.status(200).json([]) // нужно вернуть пустой массив чтобы фронт мог обработать
     }
     const formattedResults = result.rows.map((row) => {
       let date = new Date(row.date)
@@ -77,7 +77,7 @@ router.get('/next-week', authenticateToken, async (req, res) => {
     client.release()
 
     if (result.rows.length === 0) {
-      return res.status(200).json([]) // Возвращаем пустой массив если записей в базе нет
+      return res.status(200).json([])
     }
     const formattedResults = result.rows.map((row) => {
       let date = new Date(row.date)
