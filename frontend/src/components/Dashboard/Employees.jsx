@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { FaUserPlus } from 'react-icons/fa'
+import AdminPopup from './EmpComponents/AdminPopup'
 
 const Employees = () => {
   const [users, setUsers] = useState([])
+  const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('token')
-      try {
-        const response = await axios.get('http://localhost:4000/employees', {
-          headers: { Authorization: token },
-        })
-        setUsers(response.data)
-      } catch (error) {
-        console.error('Error fetching users:', error)
-      }
-    }
     fetchData()
   }, [])
+  // выносим логику в отдельную функцию для повторного использования
+  // делаем эту функцию асинхронной, чтобы она могла использовать await для динамического рендеринга новых админов
+  const fetchData = async () => {
+    const token = localStorage.getItem('token')
+    try {
+      const response = await axios.get('http://localhost:4000/employees', {
+        headers: { Authorization: token },
+      })
+      setUsers(response.data)
+    } catch (error) {
+      console.error('Error fetching users:', error)
+    }
+  }
 
   const handleStatusChange = async (id, isActive) => {
     const token = localStorage.getItem('token')
@@ -42,6 +47,18 @@ const Employees = () => {
     }
   }
 
+  const handleNewAdmin = () => {
+    setShowPopup(true)
+  }
+
+  const handleClosePopup = () => {
+    setShowPopup(false)
+  }
+  const handleAddAdminSuccess = () => {
+    fetchData()
+    // добавление новых админов в таблицу
+  }
+
   return (
     <div className="flex min-h-0 flex-1 flex-col font-custom px-6 py-6 lg:px-4">
       <div className="container mx-auto">
@@ -61,7 +78,7 @@ const Employees = () => {
                   Email сотрудника
                 </th>
                 <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Доступ сотрудника
+                  Доступ администратора
                 </th>
               </tr>
             </thead>
@@ -88,10 +105,20 @@ const Employees = () => {
             </tbody>
           </table>
         )}
-        <div className="min-w-full text-right py-3 text-blue-about-text hover:underline">
-          Выдать доступ сотруднику
-        </div>
+        <button
+          className="min-w-full text-right py-3 text-blue-about-text hover:underline flex items-center justify-end"
+          onClick={handleNewAdmin}
+        >
+          <FaUserPlus className="mr-3 text-xl" />
+          <span>Добавить администратора</span>
+        </button>
       </div>
+      {showPopup && (
+        <AdminPopup
+          onClose={handleClosePopup}
+          onSuccess={handleAddAdminSuccess}
+        />
+      )}
     </div>
   )
 }

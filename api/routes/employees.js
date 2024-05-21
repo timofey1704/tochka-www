@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Pool } = require('pg')
+const bcrypt = require('bcrypt')
 const authenticateToken = require('../middlewares/authMiddleware')
 
 const pool = new Pool({
@@ -11,21 +12,21 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
-// Получение всех пользователей
+// получение всех админов
 router.get('/', authenticateToken, async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users')
     if (result.rows.length === 0) {
       return res.status(200).json([]) // нужно вернуть пустой массив чтобы фронт мог обработать
     }
-    res.status(200).json(result.rows) // Отправляем данные клиенту
+    res.status(200).json(result.rows)
   } catch (error) {
     console.error('Ошибка выполнения запроса:', error)
     res.status(500).json({ error: 'Ошибка выполнения запроса' })
   }
 })
 
-// Обновление статуса пользователя
+// обновление статуса админа
 router.put('/:id/status', authenticateToken, async (req, res) => {
   const userId = req.params.id
   const { isActive } = req.body
@@ -47,6 +48,29 @@ router.put('/:id/status', authenticateToken, async (req, res) => {
     res.status(200).json(result.rows[0])
   } catch (error) {
     console.error('Error updating user status:', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// добавление нового админа
+router.post('/add-admin', authenticateToken, async (req, res) => {
+  const { username, password, email } = req.body
+
+  if (!username || !password || !email) {
+    return res.status(400).json({ error: 'Поля не могут быть пустыми' })
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const result = await pool.query(
+      'INSERT INTO users (is_active, username, password, email) VALUES ($1, $2, $3, $4) RETURNING *',
+      [true, username, hashedPassword, email]
+    )
+
+    res.status(201).json(result.rows[0])
+  } catch (error) {
+    console.error('Не получилось добавить админа', error)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
