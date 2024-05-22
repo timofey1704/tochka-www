@@ -106,7 +106,7 @@ const Employees = () => {
           </table>
         )}
         <button
-          className="min-w-full text-right py-3 text-blue-about-text hover:underline flex items-center justify-end"
+          className="py-3 text-blue-about-text hover:underline flex items-center"
           onClick={handleNewAdmin}
         >
           <FaUserPlus className="mr-3 text-xl" />

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import './Contacts.css'
-import About from './ContactsComponents/About'
+import About from './About'
 
 const Contacts = () => {
   const currentURL = window.location.href

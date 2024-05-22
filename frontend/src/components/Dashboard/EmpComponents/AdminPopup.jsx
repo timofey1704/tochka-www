@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux'
 import { showSuccess } from '../../../redux/slices/notificationSlice'
 import { FaTimes } from 'react-icons/fa'
 
-const AdminPopup = ({ onClose }) => {
+const AdminPopup = ({ onClose, onSuccess }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
-  const dispatch = useDispatch() // Вызов useDispatch как функцию
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -28,6 +28,7 @@ const AdminPopup = ({ onClose }) => {
           position: 'top-center',
         })
       )
+      onSuccess() // вызов функции onSuccess для обновления списка админов
       onClose()
     } catch (error) {
       console.error('Ошибка при добавлении администратора:', error)
