@@ -10,7 +10,7 @@ const MainLayout = () => {
 
   return (
     <>
-      {isAdminRoute ? <AdminHeader /> : <Header />}
+      {!isLoginPage && (isAdminRoute ? <AdminHeader /> : <Header />)}
       <Outlet />
       {!isAdminRoute && !isLoginPage && <Footer />}
     </>

@@ -23,10 +23,10 @@ const Header = () => {
 
   return (
     <header className="bg-white shadow-md fixed w-full z-10">
-      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-2 flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <img src={header_logo} alt="logo" className="w-40 h-24" />
-          <h1 className="hidden lg:block font-postNoBillsJaffna text-3xl text-gray-800">
+          <h1 className="hidden lg:block font-postNoBills text-4xl text-gray-800">
             TOCHKA
           </h1>
         </div>
@@ -51,9 +51,18 @@ const Header = () => {
             >
               Инструментальная база
             </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? 'text-blue-600' : 'text-gray-800'
+              }
+              to="mastering"
+              onClick={closePopup}
+            >
+              Мастеринг
+            </NavLink>
           </div>
           <button
-            className="lg:hidden flex flex-col items-center justify-center h-8 w-8"
+            className="lg:hidden flex flex-col items-center justify-center pr-2 h-9 w-9"
             onClick={toggleMenu}
           >
             <div
@@ -98,6 +107,15 @@ const Header = () => {
             onClick={closePopup}
           >
             Инструментальная база
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? 'text-blue-600' : 'text-gray-800'
+            }
+            to="mastering"
+            onClick={closePopup}
+          >
+            Мастеринг
           </NavLink>
         </nav>
       </div>

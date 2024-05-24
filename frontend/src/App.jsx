@@ -13,6 +13,7 @@ import Clients from './components/Dashboard/Clients'
 import ScrollToTop from './components/utils/ScrollToTop'
 import PrivacyPolicy from './components/StaticPages/PrivacyPolicy'
 import Price from './components/Navigation/Price/Price'
+import Mastering from './components/Navigation/Mastering/Mastering'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path="/dashboard/employees" element={<Employees />} />
               <Route path="dashboard/clients" element={<Clients />} />
               <Route path="instrumental" element={<InsrumentalBase />} />
+              <Route path="mastering" element={<Mastering />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/price" element={<Price />} />
