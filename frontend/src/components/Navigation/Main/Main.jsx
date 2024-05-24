@@ -19,7 +19,7 @@ const Contacts = () => {
           <link rel="canonical" href={currentURL} />
         </Helmet>
 
-        <div className="about">
+        <div className="pt-24">
           <About />
           <Favors />
           <Customers />

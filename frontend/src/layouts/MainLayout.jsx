@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom'
-import Menu from '../components/Navigation/Menu'
+import AdminHeader from '../components/Header/AdminHeader'
+import Header from '../components/Header/Header'
 import Footer from '../components/Footer/Footer'
 
 const MainLayout = () => {
@@ -9,7 +10,7 @@ const MainLayout = () => {
 
   return (
     <>
-      <Menu isAdminRoute={isAdminRoute} />
+      {isAdminRoute ? <AdminHeader /> : <Header />}
       <Outlet />
       {!isAdminRoute && !isLoginPage && <Footer />}
     </>
