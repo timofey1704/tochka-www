@@ -47,10 +47,10 @@ const Header = () => {
 
           <NavLink
             className={({ isActive }) => (isActive ? 'activeLink' : 'Link')}
-            to="track-record"
+            to="instrumental"
             onClick={closePopup}
           >
-            Записать трек
+            Инструментальная база
           </NavLink>
         </nav>
       </div>

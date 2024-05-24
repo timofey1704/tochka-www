@@ -1,6 +1,8 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import About from './About'
+import Favors from './Favors'
+import Customers from './Customers'
 
 const Contacts = () => {
   const currentURL = window.location.href
@@ -19,6 +21,8 @@ const Contacts = () => {
 
         <div className="about">
           <About />
+          <Favors />
+          <Customers />
         </div>
       </div>
     </>

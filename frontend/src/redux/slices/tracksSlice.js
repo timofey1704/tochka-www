@@ -4,7 +4,6 @@ import { showError } from './notificationSlice'
 
 const initialState = {
   tracks: [],
-  isLoadingViaAPI: false,
 }
 
 export const fetchTrack = createAsyncThunk(
@@ -25,22 +24,12 @@ const tracksSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchTrack.pending, (state) => {
-        state.isLoadingViaAPI = true
-      })
-      .addCase(fetchTrack.fulfilled, (state, action) => {
-        state.isLoadingViaAPI = false
-
-        state.tracks.push(action.payload)
-      })
-      .addCase(fetchTrack.rejected, (state) => {
-        state.isLoadingViaAPI = false
-      })
+    builder.addCase(fetchTrack.fulfilled, (state, action) => {
+      state.tracks.push(action.payload)
+    })
   },
 })
 
 export const selectTracks = (state) => state.tracks.tracks
-export const selectIsLoadingViaAPI = (state) => state.tracks.isLoadingViaAPI
 
 export default tracksSlice.reducer

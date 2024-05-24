@@ -10,6 +10,9 @@ import Login from './components/Navigation/Account/Login'
 import Dashboard from './components/Dashboard/Dashboard'
 import Employees from './components/Dashboard/Employees'
 import Clients from './components/Dashboard/Clients'
+import ScrollToTop from './components/utils/ScrollToTop'
+import PrivacyPolicy from './components/StaticPages/PrivacyPolicy'
+import Price from './components/Navigation/Price/Price'
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
 
       <BrowserRouter>
         <div className="App">
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Main />} />
@@ -30,6 +34,8 @@ function App() {
               <Route path="dashboard/clients" element={<Clients />} />
               <Route path="instrumental" element={<InsrumentalBase />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/price" element={<Price />} />
             </Route>
           </Routes>
         </div>

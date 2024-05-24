@@ -11,27 +11,6 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 
-router.post('/', authenticateToken, async (req, res) => {
-  const { telegram_id, date, time, phone } = req.body
-  if (!telegram_id || !date || !time || !phone) {
-    return res.status(400).json({ error: 'Все поля должны быть заполнены!' })
-  }
-
-  try {
-    const client = await pool.connect()
-    const query =
-      'INSERT INTO clients (telegram_id, date, time, phone) VALUES ($1, $2, $3, $4) RETURNING *'
-    const values = [telegram_id, date, time, phone]
-    const result = await client.query(query, values)
-    client.release()
-
-    res.status(201).json(result.rows[0])
-  } catch (error) {
-    console.error('Ошибка при сохранении данных в базу:', error)
-    res.status(500).json({ error: 'Ошибка сервера' })
-  }
-})
-
 // отдаем данные для таблицы "Клиенты на прошлой неделе"
 router.get('/prev-week', authenticateToken, async (req, res) => {
   try {
