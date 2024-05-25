@@ -16,9 +16,7 @@ const NextArrow = (props) => (
   </div>
 )
 
-export { PrevArrow, NextArrow }
-
-const ImageSlider = ({ images }) => {
+const ImageSlider = ({ instruments }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -59,13 +57,17 @@ const ImageSlider = ({ images }) => {
 
   return (
     <Slider {...settings}>
-      {images.map((image, index) => (
+      {instruments.map((instrument, index) => (
         <div key={index} className="slide-image">
           <img
-            src={image}
+            src={instrument.image}
             alt={`Slide ${index}`}
             style={{ width: '100%', display: 'block' }}
           />
+          <div className="slide-description">
+            <h3>{instrument.name}</h3>
+            <p>{instrument.description}</p>
+          </div>
         </div>
       ))}
     </Slider>

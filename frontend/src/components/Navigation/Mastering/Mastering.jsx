@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-import { useInView } from 'react-intersection-observer'
+// import { useInView } from 'react-intersection-observer'
 import { Helmet } from 'react-helmet'
 import TrackFormPopup from '../../TrackFormPopup/TrackFormPopup'
+import Bottom from './Bottom'
 
 const Mastering = () => {
-  const { ref, inView } = useInView({ triggerOnce: true })
+  // const { ref, inView } = useInView({ triggerOnce: true })
   const [isPopupOpen, setIsPopupOpen] = useState(false)
 
   const openPopup = () => {
@@ -85,7 +86,7 @@ const Mastering = () => {
         </motion.div>
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white"
         ref={ref}
         initial={{ opacity: 0 }}
@@ -98,7 +99,7 @@ const Mastering = () => {
           animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
-          Дополнительная секция
+          экран 2
         </motion.h2>
         <motion.p
           className="text-xl md:text-xl lg:text-2xl xl:text-3xl"
@@ -106,9 +107,10 @@ const Mastering = () => {
           animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
           transition={{ duration: 1, delay: 1 }}
         >
-          Содержание этой секции появится при прокрутке.
+          экран 2
         </motion.p>
-      </motion.div>
+      </motion.div> */}
+      <Bottom />
     </div>
   )
 }

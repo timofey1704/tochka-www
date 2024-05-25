@@ -3,6 +3,10 @@ module.exports = {
   content: ['./src/components/**/*.{html,js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      gridTemplateRows: {
+        '[auto,auto,1fr]': 'auto auto 1fr',
+      },
+
       fontFamily: {
         palanquin: ['Palanquin', 'sans-serif'],
         postNoBills: ['Post No Bills Jaffna', 'sans-serif'],
@@ -87,5 +91,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/aspect-ratio')],
 }

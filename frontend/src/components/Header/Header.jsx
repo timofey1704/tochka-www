@@ -58,7 +58,7 @@ const Header = () => {
               to="mastering"
               onClick={closePopup}
             >
-              Мастеринг
+              Трек под ключ
             </NavLink>
           </div>
           <button
@@ -115,7 +115,7 @@ const Header = () => {
             to="mastering"
             onClick={closePopup}
           >
-            Мастеринг
+            Трек под ключ
           </NavLink>
         </nav>
       </div>
