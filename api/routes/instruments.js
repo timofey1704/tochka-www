@@ -29,7 +29,7 @@ router.get('/listings/:link', async (req, res) => {
       link,
     ])
     if (result.rows.length === 0) {
-      return res.status(200).json([])
+      return res.status(404).json({ error: 'Listing not found!' })
     }
     res.json(result.rows[0])
   } catch (error) {

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import NotFound from '../NotFound'
 
 const InstrumentalListing = () => {
   const { link } = useParams()
-  const [instrument, setInstrument] = useState(null)
+  const [instrument, setInstrument] = useState([])
+  const { headertexts, features, images, error } = instrument
 
   useEffect(() => {
     const fetchInstrument = async () => {
@@ -14,18 +16,20 @@ const InstrumentalListing = () => {
         )
         setInstrument(response.data)
       } catch (error) {
+        setInstrument((prevState) => ({ ...prevState, error: true }))
         console.error('Error fetching listing', error)
       }
     }
     fetchInstrument()
   }, [link])
 
-  if (!instrument) {
-    return <div className="pt-24">Loading...</div>
+  if (error) {
+    return (
+      <div className="pt-24">
+        <NotFound />
+      </div>
+    )
   }
-  const { headertexts, features, images } = instrument
-
-  console.log(instrument.headertexts)
 
   return (
     <div className="bg-white">
