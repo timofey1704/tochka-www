@@ -32,6 +32,11 @@ const Footer = () => {
                 </NavLink>
               </li>
               <li className="mb-2">
+                <NavLink to="/mastering" className="hover:underline">
+                  Трек под ключ
+                </NavLink>
+              </li>
+              <li className="mb-2">
                 <NavLink to="/instrumental" className="hover:underline">
                   Инструментальная база
                 </NavLink>
@@ -78,8 +83,11 @@ const Footer = () => {
         </div>
         <div className="mt-8 border-t border-gray-600 pt-4">
           <p className="text-center text-gray-400">
-            &copy; {new Date().getFullYear()} Tochka Records. Все права
-            защищены.
+            &copy; {new Date().getFullYear()}{' '}
+            <NavLink to="/" className="hover:underline">
+              Tochka Records.
+            </NavLink>{' '}
+            Все права защищены.
           </p>
         </div>
       </div>
