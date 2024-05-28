@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import header_logo from '../../img/header_logo.png'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +25,11 @@ const Header = () => {
       <div className="container mx-auto px-2 flex items-center justify-between">
         <NavLink to="/">
           <div className="flex items-center space-x-4">
-            <img src={header_logo} alt="logo" className="w-40 h-24" />
+            <img
+              src="https://i.ibb.co/3kPSzVW/header-logo.png"
+              alt="logo"
+              className="w-40 h-24"
+            />
             <h1 className="hidden lg:block font-postNoBills text-4xl text-gray-800">
               TOCHKA
             </h1>
