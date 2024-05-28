@@ -24,12 +24,14 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md fixed w-full z-10">
       <div className="container mx-auto px-2 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <img src={header_logo} alt="logo" className="w-40 h-24" />
-          <h1 className="hidden lg:block font-postNoBills text-4xl text-gray-800">
-            TOCHKA
-          </h1>
-        </div>
+        <NavLink to="/">
+          <div className="flex items-center space-x-4">
+            <img src={header_logo} alt="logo" className="w-40 h-24" />
+            <h1 className="hidden lg:block font-postNoBills text-4xl text-gray-800">
+              TOCHKA
+            </h1>
+          </div>
+        </NavLink>
         <div className="flex items-center">
           <div className="space-x-6 hidden lg:flex">
             <NavLink

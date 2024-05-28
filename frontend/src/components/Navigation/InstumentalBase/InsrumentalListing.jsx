@@ -24,11 +24,7 @@ const InstrumentalListing = () => {
   }, [link])
 
   if (error) {
-    return (
-      <div className="pt-24">
-        <NotFound />
-      </div>
-    )
+    return <NotFound />
   }
 
   return (

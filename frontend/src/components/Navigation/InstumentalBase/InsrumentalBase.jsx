@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import InstrumentCard from './InstrumentCard'
-import InstrumentRequestForm from './InstrumentRequestForm'
+import TrackFormPopup from '../../TrackFormPopup/TrackFormPopup'
 import axios from 'axios'
 
 const InstrumentalBase = () => {
   const [instruments, setInstruments] = useState([])
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const openPopup = () => {
+    setIsPopupOpen(true)
+  }
 
   useEffect(() => {
     const fetchInstruments = async () => {
@@ -29,23 +33,26 @@ const InstrumentalBase = () => {
             <p className="text-gray-700 pb-3">
               В нашей инструментальной базе вы найдете широкий выбор
               профессионального музыкального оборудования, которое поможет вам
-              воплотить ваши творческие идеи в жизнь. Независимо от того, вы
-              начинающий музыкант или опытный профессионал, у нас есть все
-              необходимое для создания уникального звучания и выступлений
-              высокого уровня.
+              <button
+                className="text-blue-about-text hover:underline"
+                onClick={openPopup}
+              >
+                воплотить ваши творческие идеи в жизнь.
+              </button>{' '}
+              Независимо от того, вы начинающий музыкант или опытный
+              профессионал, у нас есть все необходимое для создания уникального
+              звучания и выступлений высокого уровня.
             </p>
+            {isPopupOpen && (
+              <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
+            )}
             <div className="grid pt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {instruments.map((instrument) => (
                 <InstrumentCard key={instrument.id} instrument={instrument} />
               ))}
             </div>
           </div>
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Записаться:
-            </h2>
-            <InstrumentRequestForm onClose={() => {}} />
-          </div>
+          <div className="mt-12"></div>
         </div>
       </main>
     </div>

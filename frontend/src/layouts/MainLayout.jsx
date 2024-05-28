@@ -9,11 +9,13 @@ const MainLayout = () => {
   const isLoginPage = location.pathname.startsWith('/login')
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       {!isLoginPage && (isAdminRoute ? <AdminHeader /> : <Header />)}
-      <Outlet />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
       {!isAdminRoute && !isLoginPage && <Footer />}
-    </>
+    </div>
   )
 }
 

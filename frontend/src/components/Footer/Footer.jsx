@@ -5,7 +5,7 @@ import { IoIosCall } from 'react-icons/io'
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-700 text-white py-8">
+    <footer className="bg-gray-700 text-white py-8 mt-auto">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
@@ -70,7 +70,6 @@ const Footer = () => {
               >
                 <SlSocialVkontakte className="h-6 w-6 hover:text-white" />
               </a>
-
               <a
                 href="https://instagram.com"
                 target="_blank"
@@ -94,4 +93,5 @@ const Footer = () => {
     </footer>
   )
 }
+
 export default Footer
