@@ -32,7 +32,7 @@
 
    ```sh
    git clone https://github.com/yourusername/tochka-www.git
-   cd recording-studio-tochka
+   cd tochka-www
    ```
 
 2. **Установка зависимостей для фронтенда и бэкенда:**
