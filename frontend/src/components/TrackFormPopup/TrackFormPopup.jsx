@@ -28,22 +28,44 @@ const TrackFormPopup = ({ onClose }) => {
       time,
       phone,
     }
+    try {
+      const response = await dispatch(
+        fetchTrack({
+          url: 'http://localhost:4000/requests',
+          data: databaseDetails,
+        })
+      ).unwrap()
+
+      if (response.reason === 'TIME_UNAVAILABLE') {
+      }
+    } catch (error) {
+      console.error('Ошибка при отправке данных:', error)
+      if (error.reason === 'TIME_UNAVAILABLE') {
+        dispatch(
+          showError({
+            message: 'Выбранное время недоступно.',
+            position: 'top-center',
+          })
+        )
+      } else {
+        console.error('Ошибка при отправке сообщения:', error)
+        dispatch(
+          showError({
+            message: 'Ошибка при отправке данных!',
+            position: 'top-center',
+          })
+        )
+      }
+      return
+    }
 
     try {
-      dispatch(
+      await dispatch(
         fetchTrack({
           url: 'http://localhost:4000/send-message',
           data: trackDetails,
         })
       )
-
-      dispatch(
-        fetchTrack({
-          url: 'http://localhost:4000/requests',
-          data: databaseDetails,
-        })
-      )
-
       onClose()
       dispatch(
         showSuccess({
@@ -52,10 +74,10 @@ const TrackFormPopup = ({ onClose }) => {
         })
       )
     } catch (error) {
-      console.error('Ошибка при отправке данных:', error)
+      console.error('Ошибка при отправке сообщения:', error)
       dispatch(
         showError({
-          message: 'Ошибка при отправке данных!',
+          message: 'Ошибка при отправке сообщения',
           position: 'top-center',
         })
       )

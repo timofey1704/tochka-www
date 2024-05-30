@@ -13,7 +13,6 @@ export const fetchTrack = createAsyncThunk(
       const res = await axios.post(url, data)
       return res.data
     } catch (error) {
-      thunkAPI.dispatch(showError(error.message))
       return thunkAPI.rejectWithValue(error.response.data)
     }
   }

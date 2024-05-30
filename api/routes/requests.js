@@ -19,12 +19,27 @@ router.post('/', async (req, res) => {
   let client
   try {
     client = await pool.connect()
-    const query =
-      'INSERT INTO clients (telegram_id, date, time, phone) VALUES ($1, $2, $3, $4) RETURNING *'
-    const values = [telegram_id, date, time, phone]
-    const result = await client.query(query, values)
 
-    res.status(201).json(result.rows[0])
+    // проверка занятости выбранного времени
+    const checkQuery = 'SELECT * FROM clients WHERE date = $1 AND time = $2'
+    const checkValues = [date, time]
+    const checkResult = await client.query(checkQuery, checkValues)
+
+    if (checkResult.rows.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Выбранное время недоступно',
+        reason: 'TIME_UNAVAILABLE',
+      })
+    }
+
+    // добавление записи в базу
+    const insertQuery =
+      'INSERT INTO clients (telegram_id, date, time, phone) VALUES ($1, $2, $3, $4) RETURNING *'
+    const insertValues = [telegram_id, date, time, phone]
+    const insertResult = await client.query(insertQuery, insertValues)
+
+    res.status(201).json(insertResult.rows[0])
   } catch (error) {
     console.error('Ошибка при сохранении данных в базу:', error)
     res.status(500).json({ error: 'Ошибка сервера' })
