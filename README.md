@@ -40,7 +40,7 @@
    ```sh
    cd frontend
    npm install
-   cd ../backend
+   cd api
    npm install
    ```
 
