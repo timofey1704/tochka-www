@@ -11,8 +11,8 @@ const pool = new Pool({
 })
 
 router.post('/', async (req, res) => {
-  const { telegram_id, date, time, phone } = req.body
-  if (!telegram_id || !date || !time || !phone) {
+  const { telegram_id, date, time, phone, end_time } = req.body
+  if (!telegram_id || !date || !time || !phone | !end_time) {
     return res.status(400).json({ error: 'Все поля должны быть заполнены!' })
   }
 
@@ -35,8 +35,8 @@ router.post('/', async (req, res) => {
 
     // добавление записи в базу
     const insertQuery =
-      'INSERT INTO clients (telegram_id, date, time, phone) VALUES ($1, $2, $3, $4) RETURNING *'
-    const insertValues = [telegram_id, date, time, phone]
+      'INSERT INTO clients (telegram_id, date, time, phone, end_time) VALUES ($1, $2, $3, $4, $5) RETURNING *'
+    const insertValues = [telegram_id, date, time, phone, end_time]
     const insertResult = await client.query(insertQuery, insertValues)
 
     res.status(201).json(insertResult.rows[0])
