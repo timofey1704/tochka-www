@@ -31,7 +31,7 @@
 1. **Клонирование репозитория:**
 
    ```sh
-   git clone https://github.com/yourusername/tochka-www.git
+   git clone https://github.com/timofey1704/tochka-www.git
    cd tochka-www
    ```
 
@@ -49,7 +49,7 @@
    Создайте базу данных PostgreSQL и выполните миграции:
 
    ```sh
-   createdb tochka_db
+   createdb postgres
    # Выполните миграции, если они имеются
    # Например, если используется Sequelize:
    npx sequelize-cli db:migrate
@@ -60,9 +60,24 @@
    Создайте файл `.env` в директории `api` и добавьте необходимые переменные окружения:
 
    ```env
-   DATABASE_URL=postgres://username:password@localhost:5432/tochka_db
-   PORT=5000
+   # telegram data
+   BOT_TOKEN=
+   CHAT_ID =
    ```
+
+   # database connection
+
+   DB_USER =
+   DB_HOST =
+   DB_NAME =
+   DB_PASSWORD =
+   DB_PORT = 5432
+
+   # jwt
+
+   JWT_SECRET=
+
+````
 
 5. **Запуск проекта:**
 
@@ -73,16 +88,16 @@
    ```sh
    cd api
    npm run dev
-   ```
+````
 
-   Во втором терминале запустите фронтенд:
+Во втором терминале запустите фронтенд:
 
-   ```sh
-   cd frontend
-   npm start
-   ```
+```sh
+cd frontend
+npm start
+```
 
-   Теперь проект будет доступен по адресу `http://localhost:3000`.
+Теперь проект будет доступен по адресу `http://localhost:3000`.
 
 ## Использование
 
@@ -92,11 +107,11 @@
 
 Если вы хотите внести вклад в проект, пожалуйста, следуйте этим шагам:
 
-1. Форкните этот репозиторий.
-2. Создайте ветку с вашей функцией (`git checkout -b feature/AmazingFeature`).
-3. Сделайте коммит ваших изменений (`git commit -m 'Добавлена новая функция'`).
-4. Запушьте в ветку (`git push origin feature/AmazingFeature`).
-5. Откройте Pull Request.
+1.  Форкните этот репозиторий.
+2.  Создайте ветку с вашей функцией (`git checkout -b feature/AmazingFeature`).
+3.  Сделайте коммит ваших изменений (`git commit -m 'Добавлена новая функция'`).
+4.  Запушьте в ветку (`git push origin feature/AmazingFeature`).
+5.  Откройте Pull Request.
 
 ## Лицензия
 

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { Pool } = require('pg')
 const authenticateToken = require('../middlewares/authMiddleware')
+const ExcelJS = require('exceljs')
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -16,10 +17,11 @@ router.get('/prev-week', authenticateToken, async (req, res) => {
   try {
     const client = await pool.connect()
     const query = `
-      SELECT *
-      FROM clients
-      WHERE date >= current_date - interval '7 days'
-      AND date < current_date;
+    SELECT *,
+    to_char(time, 'HH24:MI') AS formatted_time
+FROM clients
+WHERE date >= current_date - interval '7 days'
+AND date < current_date;
     `
     const result = await client.query(query)
     client.release()
@@ -47,7 +49,8 @@ router.get('/next-week', authenticateToken, async (req, res) => {
   try {
     const client = await pool.connect()
     const query = `
-    SELECT *
+    SELECT *,
+    to_char(time, 'HH24:MI') AS formatted_time
     FROM clients
     WHERE date >= current_date
     AND date < current_date + interval '8 days';
@@ -67,6 +70,102 @@ router.get('/next-week', authenticateToken, async (req, res) => {
     })
 
     res.status(200).json(formattedResults)
+  } catch (error) {
+    console.error('Ошибка при получении данных из базы:', error)
+    res.status(500).json({ error: 'Ошибка сервера' })
+  }
+})
+
+router.get('/export-prev-week', authenticateToken, async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const query = `
+      SELECT *,
+      to_char(time, 'HH24:MI') AS formatted_time
+      FROM clients
+      WHERE date >= current_date - interval '7 days'
+      AND date < current_date;
+    `
+    const result = await client.query(query)
+    client.release()
+
+    const workbook = new ExcelJS.Workbook()
+    const worksheet = workbook.addWorksheet('Clients')
+
+    worksheet.columns = [
+      { header: 'Telegram ID', key: 'telegram_id', width: 32 },
+      { header: 'Дата', key: 'date', width: 15 },
+      { header: 'Время', key: 'formatted_time', width: 10 },
+      { header: 'Телефон', key: 'phone', width: 32 },
+    ]
+
+    result.rows.forEach((row) => {
+      let date = new Date(row.date)
+      worksheet.addRow({
+        ...row,
+        date: date.toISOString().split('T')[0],
+      })
+    })
+
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    res.setHeader(
+      'Content-Disposition',
+      'attachment; filename=clients-prev-week.xlsx'
+    )
+
+    await workbook.xlsx.write(res)
+    res.end()
+  } catch (error) {
+    console.error('Ошибка при получении данных из базы:', error)
+    res.status(500).json({ error: 'Ошибка сервера' })
+  }
+})
+
+router.get('/export-next-week', authenticateToken, async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const query = `
+      SELECT *,
+      to_char(time, 'HH24:MI') AS formatted_time
+      FROM clients
+      WHERE date >= current_date
+      AND date < current_date + interval '8 days';
+    `
+    const result = await client.query(query)
+    client.release()
+
+    const workbook = new ExcelJS.Workbook()
+    const worksheet = workbook.addWorksheet('Clients')
+
+    worksheet.columns = [
+      { header: 'Telegram ID', key: 'telegram_id', width: 32 },
+      { header: 'Дата', key: 'date', width: 15 },
+      { header: 'Время', key: 'formatted_time', width: 10 },
+      { header: 'Телефон', key: 'phone', width: 32 },
+    ]
+
+    result.rows.forEach((row) => {
+      let date = new Date(row.date)
+      worksheet.addRow({
+        ...row,
+        date: date.toISOString().split('T')[0],
+      })
+    })
+
+    res.setHeader(
+      'Content-Type',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    res.setHeader(
+      'Content-Disposition',
+      'attachment; filename=clients-next-week.xlsx'
+    )
+
+    await workbook.xlsx.write(res)
+    res.end()
   } catch (error) {
     console.error('Ошибка при получении данных из базы:', error)
     res.status(500).json({ error: 'Ошибка сервера' })

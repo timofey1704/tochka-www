@@ -17,8 +17,8 @@ const AdminHeader = () => {
   }
   return (
     <header className="bg-blue-400 text-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between">
-        <nav className="flex space-x-4 items-center pt-5">
+      <div className="container mx-auto flex justify-center">
+        <nav className="flex space-x-5 py-5">
           <NavLink
             to="/dashboard/home"
             exact="true"
