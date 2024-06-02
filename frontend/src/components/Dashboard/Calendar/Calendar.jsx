@@ -34,7 +34,7 @@ const DashboardCalendar = () => {
     const fetchEvents = async () => {
       try {
         const token = localStorage.getItem('token')
-        const response = await axios.get('http://localhost:4000/dashboard', {
+        const response = await axios.get('http://localhost:4000/track-record', {
           headers: { Authorization: token },
         })
 

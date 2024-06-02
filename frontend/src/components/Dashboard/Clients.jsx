@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { FaFileExcel } from 'react-icons/fa'
 
 const Clients = () => {
   const [prevTableData, setPrevTableData] = useState([])
@@ -95,10 +96,12 @@ const Clients = () => {
             <h2 className="text-xl font-bold mb-4">
               Клиенты за прошлую неделю:
             </h2>
+
             <button
               className="py-3 text-blue-about-text hover:underline flex items-center"
               onClick={handlePrevWeekDownload}
             >
+              <FaFileExcel className="m-2" />
               Выгрузить в excel
             </button>
           </div>
@@ -153,6 +156,7 @@ const Clients = () => {
               className="pt-10 text-blue-about-text hover:underline flex items-center"
               onClick={handleNextWeekDownload}
             >
+              <FaFileExcel className="m-2" />
               Выгрузить в excel
             </button>
           </div>
