@@ -32,6 +32,11 @@ const Footer = () => {
                 </NavLink>
               </li>
               <li className="mb-2">
+                <NavLink to="/schedule" className="hover:underline">
+                  Расписание
+                </NavLink>
+              </li>
+              <li className="mb-2">
                 <NavLink to="/mastering" className="hover:underline">
                   Трек под ключ
                 </NavLink>
