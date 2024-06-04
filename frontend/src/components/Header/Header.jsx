@@ -65,6 +65,15 @@ const Header = () => {
             >
               Трек под ключ
             </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? 'text-blue-600' : 'text-gray-800'
+              }
+              to="schedule"
+              onClick={closePopup}
+            >
+              Расписание
+            </NavLink>
           </div>
           <button
             className="lg:hidden flex flex-col items-center justify-center pr-2 h-9 w-9"

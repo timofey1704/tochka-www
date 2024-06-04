@@ -15,6 +15,7 @@ import PrivacyPolicy from './components/StaticPages/PrivacyPolicy'
 import Price from './components/Navigation/Price/Price'
 import Mastering from './components/Navigation/Mastering/Mastering'
 import InsrumentalListing from './components/Navigation/InstumentalBase/InsrumentalListing'
+import Schedule from './components/Navigation/Schedule/Schedule'
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               <Route path="/price" element={<Price />} />
+              <Route path="/schedule" element={<Schedule />} />
             </Route>
           </Routes>
         </div>

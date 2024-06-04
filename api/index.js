@@ -9,6 +9,7 @@ const clientsRouter = require('./routes/clients')
 const usersRouter = require('./routes/employees')
 const requestRouter = require('./routes/requests')
 const instrumentsRouter = require('./routes/instruments')
+const scheduleRouter = require('./routes/schedule')
 const authenticateToken = require('./middlewares/authMiddleware')
 
 const app = express()
@@ -23,6 +24,7 @@ app.use('/track-record', authenticateToken, clientsRouter)
 app.use('/employees', authenticateToken, usersRouter)
 app.use('/requests', requestRouter)
 app.use('/instruments', instrumentsRouter)
+app.use('/schedule', scheduleRouter)
 
 const port = process.env.PORT || 4000
 app.listen(port, () => {

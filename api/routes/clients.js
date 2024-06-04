@@ -91,6 +91,7 @@ router.get('/next-week', authenticateToken, async (req, res) => {
   }
 })
 
+//экпорт в эксель предыдущей недели
 router.get('/export-prev-week', authenticateToken, async (req, res) => {
   try {
     const client = await pool.connect()
@@ -139,6 +140,7 @@ router.get('/export-prev-week', authenticateToken, async (req, res) => {
   }
 })
 
+//экспорт в эксель будущей недели
 router.get('/export-next-week', authenticateToken, async (req, res) => {
   try {
     const client = await pool.connect()
