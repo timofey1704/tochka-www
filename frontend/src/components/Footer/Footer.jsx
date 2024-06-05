@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-6 lg:px-8">
         <div className="flex flex-wrap justify-between">
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
-            <h3 className="text-2xl font-bold mb-4">Юридическая информация</h3>
+            <h3 className="text-2xl font-bold mb-4">О нас</h3>
             <ul className="text-gray-400">
               <li className="mb-2">
                 <NavLink to="/privacy-policy" className="hover:underline">
@@ -21,11 +21,6 @@ const Footer = () => {
           <div className="w-full md:w-1/4 mb-6 md:mb-0">
             <h3 className="text-2xl font-bold mb-4">Навигация</h3>
             <ul className="text-gray-400">
-              <li className="mb-2">
-                <NavLink to="/" className="hover:underline">
-                  О нас
-                </NavLink>
-              </li>
               <li className="mb-2">
                 <NavLink to="/price" className="hover:underline">
                   Цены
