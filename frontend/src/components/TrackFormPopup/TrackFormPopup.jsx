@@ -27,9 +27,10 @@ const TrackFormPopup = ({ onClose }) => {
       telegram_id,
       date,
       time,
-      endTime,
+      end_time: endTime,
       phone,
     }
+
     try {
       const response = await dispatch(
         fetchTrack({

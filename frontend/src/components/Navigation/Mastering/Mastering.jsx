@@ -1,14 +1,11 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-// import { useInView } from 'react-intersection-observer'
 import { Helmet } from 'react-helmet'
 import TrackFormPopup from '../../TrackFormPopup/TrackFormPopup'
 import Bottom from './Bottom'
 
 const Mastering = () => {
-  // const { ref, inView } = useInView({ triggerOnce: true })
   const [isPopupOpen, setIsPopupOpen] = useState(false)
-
   const openPopup = () => {
     setIsPopupOpen(true)
   }
@@ -85,31 +82,6 @@ const Mastering = () => {
           )}
         </motion.div>
       </motion.div>
-
-      {/* <motion.div
-        className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white"
-        ref={ref}
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.h2
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4"
-          initial={{ y: 100, opacity: 0 }}
-          animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          экран 2
-        </motion.h2>
-        <motion.p
-          className="text-xl md:text-xl lg:text-2xl xl:text-3xl"
-          initial={{ y: 100, opacity: 0 }}
-          animate={inView ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-        >
-          экран 2
-        </motion.p>
-      </motion.div> */}
       <Bottom />
     </div>
   )
