@@ -15,6 +15,7 @@ import PrivacyPolicy from './components/StaticPages/PrivacyPolicy'
 import Price from './components/Navigation/Price/Price'
 import Mastering from './components/Navigation/Mastering/Mastering'
 import InsrumentalListing from './components/Navigation/InstumentalBase/InsrumentalListing'
+import Profile from './components/Dashboard/Profile/Profile'
 import Schedule from './components/Navigation/Schedule/Schedule'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
                 path="instrumental/:link"
                 element={<InsrumentalListing />}
               />
+              <Route path="dashboard/profile" element={<Profile />} />
               <Route path="mastering" element={<Mastering />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -75,4 +75,33 @@ router.post('/add-admin', authenticateToken, async (req, res) => {
   }
 })
 
+// присваивание админа клиенту
+router.post('/set-admin', authenticateToken, async (req, res) => {
+  const { id, selected_admin } = req.body
+
+  if (!id || !selected_admin) {
+    return res
+      .status(400)
+      .json({ error: 'Telegram ID and selected admin are required' })
+  }
+
+  try {
+    const result = await pool.query(
+      'UPDATE clients SET selected_admin = $1 WHERE id = $2 RETURNING *',
+      [selected_admin, id]
+    )
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Client not found' })
+    }
+
+    res
+      .status(200)
+      .json({ message: 'Admin assigned successfully', client: result.rows[0] })
+  } catch (error) {
+    console.error('Не удалось привязать админа', error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
 module.exports = router

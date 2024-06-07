@@ -17,6 +17,9 @@ const AdminHeader = () => {
     dispatch(logout())
     navigate('/login')
   }
+  const handleProfile = () => {
+    navigate('/dashboard/profile')
+  }
 
   return (
     <header className="bg-gray-100 text-black shadow-md">
@@ -60,7 +63,10 @@ const AdminHeader = () => {
             </button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content className="bg-white shadow-md rounded p-2">
-            <DropdownMenu.Item className="px-4 py-2 hover:bg-gray-100 text-gray-600 text-center cursor-pointer">
+            <DropdownMenu.Item
+              className="px-4 py-2 hover:bg-gray-100 text-gray-600 text-center cursor-pointer"
+              onClick={handleProfile}
+            >
               Профиль
             </DropdownMenu.Item>
             <DropdownMenu.Item

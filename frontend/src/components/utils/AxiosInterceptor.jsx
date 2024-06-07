@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { showError } from '../../redux/slices/notificationSlice'
+import { logout } from '../../redux/slices/authSlice'
 
-const setupAxiosInterceptors = (store) => {
+const setupAxiosInterceptors = (store, navigate) => {
   axios.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -10,14 +10,21 @@ const setupAxiosInterceptors = (store) => {
       if (error.response && error.response.status === 401) {
         // удаляем токен из localStorage
         localStorage.removeItem('token')
-        // перенаправляем на страницу логина
+        // показываем сообщение об ошибке
         dispatch(
           showError({
             message: 'Время сессии истекло, пожалуйста, войдите снова.',
             position: 'bottom-center',
           })
         )
-        const navigate = useNavigate()
+
+        // выполняем logout
+        dispatch(logout())
+
+        // консольное сообщение для дебаггинга
+        console.log('Navigating to login page due to 401 error')
+
+        // перенаправляем на страницу логина
         navigate('/login')
       }
       return Promise.reject(error)
