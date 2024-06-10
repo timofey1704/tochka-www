@@ -7,11 +7,11 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 const EmployeeChart = ({ clients, employees }) => {
   const employeeCounts = employees.map(
     (employee) =>
-      clients.filter((client) => client.assignedEmployee === employee).length
+      clients.filter((client) => client.selected_admin === employee).length
   )
 
   const unassignedCount = clients.filter(
-    (client) => !client.assignedEmployee
+    (client) => !client.selected_admin
   ).length
 
   const data = {

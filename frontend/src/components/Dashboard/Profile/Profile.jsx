@@ -37,13 +37,6 @@ const Profile = () => {
   }, [])
 
   const handleAssign = async (clientId, employee) => {
-    const updatedClients = clients.map((client) =>
-      client.id === clientId
-        ? { ...client, assignedEmployee: employee }
-        : client
-    )
-    setClients(updatedClients)
-
     const token = localStorage.getItem('token')
     if (!token) {
       console.error('Token not found')
@@ -60,6 +53,14 @@ const Profile = () => {
         {
           headers: { Authorization: token },
         }
+      )
+
+      setClients((prevClients) =>
+        prevClients.map((client) =>
+          client.id === clientId
+            ? { ...client, selected_admin: employee }
+            : client
+        )
       )
     } catch (error) {
       console.error('Error assigning employee:', error)
@@ -82,36 +83,47 @@ const Profile = () => {
               <span className="text-gray-600">
                 Количество выполненных заказов:
               </span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
                 Количество ожидаемых заказов:
               </span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
-
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
                 Количество отмененных заказов:
               </span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Количество новых заказов:</span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
                 Количество отработанных часов сотрудниками:
               </span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
                 Количество эффективно отработанных часов:
               </span>
-              <span className="text-gray-900 font-medium">x</span>
+              <span className="text-gray-900 font-medium">
+                {/* добавить данные */}
+              </span>
             </div>
           </div>
         </div>
@@ -148,7 +160,7 @@ const Profile = () => {
                         onChange={(e) =>
                           handleAssign(client.id, e.target.value)
                         }
-                        value={client.assignedEmployee || ''}
+                        value={client.selected_admin || ''}
                       >
                         <option value="">Не назначен</option>
                         {employees.map((employee) => (
