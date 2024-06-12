@@ -20,9 +20,10 @@ const formatEvents = (data) => {
     end.setHours(endHours, endMinutes, endSeconds)
 
     return {
-      title: event.telegram_id,
+      title: `${event.telegram_id} -- (${event.selected_admin})`,
       start,
       end,
+      selected_admin: event.selected_admin,
     }
   })
 }

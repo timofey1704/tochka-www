@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import WorklogChart from './WorklogChart'
 import EmployeeChart from './EmployeeChart'
+import ProfilePopup from './ProfilePopup'
 
 const Profile = () => {
   const [dataValue] = useState(73)
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [clients, setClients] = useState([])
   const [employees, setEmployees] = useState([])
+  const [selectedClient, setSelectedClient] = useState(null)
+
+  const openPopup = (client) => {
+    setSelectedClient(client)
+    setIsPopupOpen(true)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,9 +91,7 @@ const Profile = () => {
               <span className="text-gray-600">
                 Количество выполненных заказов:
               </span>
-              <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
-              </span>
+              <span className="text-gray-900 font-medium">34</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
@@ -151,7 +157,10 @@ const Profile = () => {
               <tbody>
                 {clients.map((client) => (
                   <tr key={client.id}>
-                    <td className="py-2 px-4 border-b border-gray-200">
+                    <td
+                      className="py-2 px-4 border-b border-gray-200 cursor-pointer hover:underline"
+                      onClick={() => openPopup(client)}
+                    >
                       {client.telegram_id}
                     </td>
                     <td className="py-2 px-4 border-b border-gray-200">
@@ -186,6 +195,12 @@ const Profile = () => {
           />
         </div>
       </div>
+      {isPopupOpen && selectedClient && (
+        <ProfilePopup
+          client={selectedClient}
+          onClose={() => setIsPopupOpen(false)}
+        />
+      )}
     </div>
   )
 }

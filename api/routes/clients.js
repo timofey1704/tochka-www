@@ -12,6 +12,7 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 })
 // обязательно нужно применять токен ко всем закрытым маршрутам, иначе 401
+
 //отдаем всех клиентов
 router.get('/', authenticateToken, async (req, res) => {
   try {
