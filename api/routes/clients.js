@@ -29,6 +29,49 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 })
 
+// преобразуем общее количество часов в формат HH:MM
+function convertToHoursMinutes(totalHours) {
+  const totalMinutes = Math.floor(totalHours * 60)
+  const hours = Math.floor(totalMinutes / 60)
+  const minutes = totalMinutes % 60
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+}
+
+// получаем начало и конец текущего месяца
+function getMonthStartEnd() {
+  const now = new Date()
+  const start = new Date(now.getFullYear(), now.getMonth(), 1)
+  const end = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0,
+    23,
+    59,
+    59,
+    999
+  )
+  return { start, end }
+}
+
+// вычисляем количество рабочих дней (пн-пт) в текущем месяце
+function getWorkingDaysInMonth() {
+  const { start, end } = getMonthStartEnd()
+  let count = 0
+  let current = start
+
+  while (current <= end) {
+    const dayOfWeek = current.getDay()
+    if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+      // Не воскресенье (0) и не суббота (6)
+      count++
+    }
+    current.setDate(current.getDate() + 1)
+  }
+
+  return count
+}
+
+// данные для таблицы суперюзера в дашборде
 router.get('/stats', async (req, res) => {
   try {
     const totalOrders = await Client.count()
@@ -40,9 +83,35 @@ router.get('/stats', async (req, res) => {
       where: { status: 'cancelled' },
     })
     const newOrders = await Client.count({ where: { date: new Date() } })
-    const workedHours = await sequelize.query(
-      'SELECT SUM(julianday(end_time) - julianday(time)) * 24 AS hours FROM Clients WHERE status = "completed"'
+
+    const [workedHoursResult] = await sequelize.query(
+      "SELECT SUM(EXTRACT(EPOCH FROM (end_time - time)) / 3600) AS hours FROM clients WHERE status = 'completed'"
     )
+
+    const { start, end } = getMonthStartEnd()
+
+    const [monthlyWorkedHoursResult] = await sequelize.query(
+      `SELECT SUM(EXTRACT(EPOCH FROM (end_time - time)) / 3600) AS hours 
+       FROM clients 
+       WHERE status = 'completed' AND date >= :start AND date <= :end`,
+      {
+        replacements: { start, end },
+        type: sequelize.QueryTypes.SELECT,
+      }
+    )
+
+    const monthlyWorkedHours = monthlyWorkedHoursResult.hours || 0
+    const formattedMonthlyWorkedHours =
+      convertToHoursMinutes(monthlyWorkedHours)
+
+    // вычисляем общее количество рабочих часов в текущем месяце
+    const workingDaysInMonth = getWorkingDaysInMonth()
+    const totalMonthlyWorkingHours = workingDaysInMonth * 8
+    const formattedTotalMonthlyWorkingHours = convertToHoursMinutes(
+      totalMonthlyWorkingHours
+    )
+    const persentageWT = (monthlyWorkedHours / totalMonthlyWorkingHours) * 100
+    const formattedPersentageWT = persentageWT.toFixed(2)
 
     res.json({
       totalOrders,
@@ -50,10 +119,12 @@ router.get('/stats', async (req, res) => {
       completedOrders,
       cancelledOrders,
       newOrders,
-      workedHours: workedHours[0][0].hours,
+      monthlyWorkedHours: formattedMonthlyWorkedHours,
+      totalMonthlyWorkingHours: formattedTotalMonthlyWorkingHours,
+      persentageWT: formattedPersentageWT,
     })
-  } catch (err) {
-    res.status(500).send(err.message)
+  } catch (error) {
+    res.status(500).json({ error: 'Ошибка сервера' })
   }
 })
 

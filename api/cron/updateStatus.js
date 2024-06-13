@@ -1,24 +1,51 @@
-const cron = require('node-cron')
-const { Client, Op } = require('../models/client')
+const { Client, sequelize, Op } = require('../models/client')
 
-const schedule = process.env.CRON_SCHEDULE
+async function updateStatus() {
+  console.log('Cron job started: Updating client statuses')
 
-const updateStatus = () => {
-  cron.schedule(schedule, async () => {
-    console.log('Cron job started: Updating client statuses')
-    try {
-      const today = new Date()
-      const updatedRows = await Client.update(
-        { status: 'completed' },
+  try {
+    const todayDate = new Date().toISOString().split('T')[0] // текущая дата в формате YYYY-MM-DD
+    console.log("Today's date:", todayDate) // сегодняшняя дата
+
+    // Выберите записи для отладки
+    const clientsToUpdate = await Client.findAll({
+      where: {
+        date: {
+          [Op.lt]: todayDate,
+        },
+        status: {
+          [Op.ne]: 'completed',
+        },
+      },
+    })
+
+    console.log(`Number of clients to update: ${clientsToUpdate.length}`)
+
+    if (clientsToUpdate.length > 0) {
+      // обновление статуса
+      const [numberOfAffectedRows] = await Client.update(
+        { status: 'completed', updatedAt: new Date() },
         {
-          where: { date: { [Op.lt]: today }, status: { [Op.ne]: 'completed' } },
+          where: {
+            date: {
+              [Op.lt]: todayDate,
+            },
+            status: {
+              [Op.ne]: 'completed',
+            },
+          },
         }
       )
-      console.log(`Statuses updated successfully: ${updatedRows} rows affected`)
-    } catch (err) {
-      console.error('Error updating statuses:', err.message)
+
+      console.log(
+        `Statuses updated successfully: ${numberOfAffectedRows} rows affected`
+      )
+    } else {
+      console.log('No clients need to be updated')
     }
-  })
+  } catch (error) {
+    console.error('Error updating statuses:', error)
+  }
 }
 
 module.exports = updateStatus

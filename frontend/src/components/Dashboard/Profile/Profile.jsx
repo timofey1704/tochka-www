@@ -5,10 +5,11 @@ import EmployeeChart from './EmployeeChart'
 import ProfilePopup from './ProfilePopup'
 
 const Profile = () => {
-  const [dataValue] = useState(73)
+  const [dataValue, setDataValue] = useState('')
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [clients, setClients] = useState([])
   const [employees, setEmployees] = useState([])
+  const [dataResponse, setDataResponse] = useState([])
   const [selectedClient, setSelectedClient] = useState(null)
 
   const openPopup = (client) => {
@@ -25,17 +26,22 @@ const Profile = () => {
       }
 
       try {
-        const [clientsResponse, employeesResponse] = await Promise.all([
-          axios.get('http://localhost:4000/track-record/next-week', {
-            headers: { Authorization: token },
-          }),
-          axios.get('http://localhost:4000/employees', {
-            headers: { Authorization: token },
-          }),
-        ])
+        const [clientsResponse, employeesResponse, dataResponse] =
+          await Promise.all([
+            axios.get('http://localhost:4000/track-record/next-week', {
+              headers: { Authorization: token },
+            }),
+            axios.get('http://localhost:4000/employees', {
+              headers: { Authorization: token },
+            }),
+            axios.get('http://localhost:4000/track-record/stats', {
+              headers: { Authorization: token },
+            }),
+          ])
 
         setClients(clientsResponse.data)
         setEmployees(employeesResponse.data)
+        setDataResponse(dataResponse.data)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -91,14 +97,16 @@ const Profile = () => {
               <span className="text-gray-600">
                 Количество выполненных заказов:
               </span>
-              <span className="text-gray-900 font-medium">34</span>
+              <span className="text-gray-900 font-medium">
+                {dataResponse.completedOrders}
+              </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">
                 Количество ожидаемых заказов:
               </span>
               <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
+                {dataResponse.pendingOrders}
               </span>
             </div>
             <div className="flex justify-between items-center">
@@ -106,13 +114,13 @@ const Profile = () => {
                 Количество отмененных заказов:
               </span>
               <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
+                {dataResponse.cancelledOrders}
               </span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Количество новых заказов:</span>
               <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
+                {dataResponse.newOrders}
               </span>
             </div>
             <div className="flex justify-between items-center">
@@ -120,7 +128,7 @@ const Profile = () => {
                 Количество отработанных часов сотрудниками:
               </span>
               <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
+                {dataResponse.monthlyWorkedHours}
               </span>
             </div>
             <div className="flex justify-between items-center">
@@ -128,13 +136,13 @@ const Profile = () => {
                 Количество эффективно отработанных часов:
               </span>
               <span className="text-gray-900 font-medium">
-                {/* добавить данные */}
+                {dataResponse.totalMonthlyWorkingHours}
               </span>
             </div>
           </div>
         </div>
         <div className="bg-white p-6 rounded-lg shadow-md flex items-center justify-center transform transition-transform hover:scale-105 hover:shadow-xl no-underline">
-          <WorklogChart value={dataValue} />
+          <WorklogChart value={dataResponse.persentageWT} />
         </div>
       </div>
       <h2 className="text-2xl font-bold text-gray-700 py-4">

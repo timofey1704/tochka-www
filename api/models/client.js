@@ -1,5 +1,14 @@
 const { Sequelize, DataTypes, Op } = require('sequelize')
-const sequelize = new Sequelize('sqlite::memory:')
+require('dotenv').config()
+
+const { DB_USER, DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT } = process.env
+
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
+  port: DB_PORT,
+  dialect: 'postgres',
+  logging: true,
+})
 
 const Client = sequelize.define(
   'client',
@@ -31,10 +40,12 @@ const Client = sequelize.define(
     status: {
       type: DataTypes.STRING,
       allowNull: true,
-      defaultValue: 'null',
+      defaultValue: 'pending',
     },
   },
-  {}
+  {
+    timestamps: true,
+  }
 )
 
 module.exports = { Client, sequelize, Op }
