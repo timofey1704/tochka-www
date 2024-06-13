@@ -3,6 +3,7 @@ const router = express.Router()
 const { Pool } = require('pg')
 const authenticateToken = require('../middlewares/authMiddleware')
 const ExcelJS = require('exceljs')
+const { Client, sequelize } = require('../models/client')
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -25,6 +26,34 @@ router.get('/', authenticateToken, async (req, res) => {
   } catch (error) {
     console.error('Ошибка выполнения запроса:', error)
     res.status(500).json({ error: 'Ошибка выполнения запроса' })
+  }
+})
+
+router.get('/stats', async (req, res) => {
+  try {
+    const totalOrders = await Client.count()
+    const pendingOrders = await Client.count({ where: { status: 'pending' } })
+    const completedOrders = await Client.count({
+      where: { status: 'completed' },
+    })
+    const cancelledOrders = await Client.count({
+      where: { status: 'cancelled' },
+    })
+    const newOrders = await Client.count({ where: { date: new Date() } })
+    const workedHours = await sequelize.query(
+      'SELECT SUM(julianday(end_time) - julianday(time)) * 24 AS hours FROM Clients WHERE status = "completed"'
+    )
+
+    res.json({
+      totalOrders,
+      pendingOrders,
+      completedOrders,
+      cancelledOrders,
+      newOrders,
+      workedHours: workedHours[0][0].hours,
+    })
+  } catch (err) {
+    res.status(500).send(err.message)
   }
 })
 
