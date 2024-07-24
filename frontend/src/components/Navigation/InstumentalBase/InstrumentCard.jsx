@@ -11,7 +11,9 @@ const InstrumentCard = ({ instrument }) => (
       />
       <div className="p-4">
         <h3 className="text-lg font-bold text-gray-900">{instrument.name}</h3>
-        <p className="mt-2 text-gray-600">{instrument.description}</p>
+        <section className="mt-2 text-gray-600">
+          {instrument.description}
+        </section>
         <ul className="mt-4 space-y-2">
           {instrument.features.map((feature, index) => (
             <li key={index} className="text-gray-600 flex items-center">

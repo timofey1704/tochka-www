@@ -37,9 +37,9 @@ const InstrumentalListing = () => {
                 <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
                   {headerText.header}
                 </h2>
-                <p className="mt-4 text-gray-500 text-justify tracking-tight">
+                <section className="mt-4 text-gray-500 text-justify tracking-tight">
                   {headerText.description}
-                </p>
+                </section>
               </div>
             ))}
 

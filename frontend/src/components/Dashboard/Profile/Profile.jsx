@@ -5,7 +5,6 @@ import EmployeeChart from './EmployeeChart'
 import ProfilePopup from './ProfilePopup'
 
 const Profile = () => {
-  const [dataValue, setDataValue] = useState('')
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [clients, setClients] = useState([])
   const [employees, setEmployees] = useState([])

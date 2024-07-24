@@ -30,7 +30,7 @@ const InstrumentalBase = () => {
             <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
               Доступные инструменты
             </h2>
-            <p className="text-gray-700 pb-3">
+            <section className="text-gray-700 pb-3">
               В нашей инструментальной базе вы найдете широкий выбор
               профессионального музыкального оборудования, которое поможет вам{' '}
               <button
@@ -42,7 +42,7 @@ const InstrumentalBase = () => {
               в жизнь. Независимо от того, вы начинающий музыкант или опытный
               профессионал, у нас есть все необходимое для создания уникального
               звучания и выступлений высокого уровня.
-            </p>
+            </section>
             {isPopupOpen && (
               <TrackFormPopup onClose={() => setIsPopupOpen(false)} />
             )}
