@@ -40,6 +40,7 @@
    ```sh
    cd frontend
    npm install
+
    cd api
    npm install
    ```
@@ -61,21 +62,21 @@
 
    ```env
    # telegram data
-   BOT_TOKEN=
-   CHAT_ID =
-   ```
+   BOT_TOKEN
+   CHAT_ID
 
    # database connection
 
-   DB_USER =
-   DB_HOST =
-   DB_NAME =
-   DB_PASSWORD =
+    DB_USER
+   DB_HOST
+   DB_NAME
+   DB_PASSWORD
    DB_PORT = 5432
 
    # jwt
 
-   JWT_SECRET=
+   JWT_SECRET
+   ```
 
 ````
 
