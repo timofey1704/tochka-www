@@ -15,8 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from django.urls import path, include
+from tastypie.api import Api
+from api.models import TelegramMessageResource, ClientsResource, TextsResource
+
+#! подключаем эндпоинты
+api = Api(api_name='v1')
+send_message_resource = TelegramMessageResource() #api/v1/send-message
+clients_resource = ClientsResource() #api/v1/clients
+texts_resource = TextsResource() #api/v1/texts
+
+api.register(send_message_resource)
+api.register(clients_resource)
+api.register(texts_resource)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(api.urls))
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

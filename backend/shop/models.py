@@ -5,7 +5,6 @@ from django.db import models
 # instruments
 # requests
 # schedule
-# sendMessage
 # texts
 
 class Clients(models.Model):
