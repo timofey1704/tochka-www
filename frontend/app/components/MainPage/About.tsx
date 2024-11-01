@@ -26,16 +26,16 @@ const About = async () => {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
               <div className="lg:max-w-lg">
-                <h1 className="text-base font-semibold text-blue-about-text leading-7 text-about-text">
+                <h1 className="text-lg font-semibold font-palanquin leading-7 text-red-800">
                   Создавай прекрасное
                 </h1>
-                <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                <p className="mt-2 text-3xl font-bold font-palanquin tracking-tight text-gray-900 sm:text-4xl">
                   Добро пожаловать в наше творческое пространство
                 </p>
                 <p className="mt-6 text-lg leading-8">
                   В нашей{' '}
                   <Link
-                    className="text-blue-about-text hover:underline"
+                    className="text-blue-700 hover:underline"
                     href="/instruments"
                   >
                     студии звукозаписи
@@ -49,7 +49,7 @@ const About = async () => {
                       iconMap[feature.icon as keyof typeof iconMap]
                     return (
                       <div key={feature.id} className="relative pl-9">
-                        <dt className="inline font-semibold text-blue-about-text">
+                        <dt className="inline font-semibold text-blue-700">
                           {IconComponent && (
                             <IconComponent
                               className="absolute left-1 top-1 h-5 w-5"

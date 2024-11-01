@@ -65,5 +65,5 @@ class Texts(models.Model):
         verbose_name_plural = "Тексты"
     
     def __str__(self):
-        return self.component
+        return f'{self.component} - {self.name}'
     
