@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
-import Header from './components/Header/Header' // Импортируем Header
-import Footer from './components/Footer/Footer' // Импортируем Footer
+import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
+const geistPalanquin = localFont({
+  src: '../public/fonts/palanquin/Palanquin-Regular.ttf',
+  variable: '--font-geist-palanquin',
   weight: '100 900',
 })
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
+const geistPostNoBillsJaffna = localFont({
+  src: '../public/fonts/post-no-bills-jaffna/PostNoBillsJaffna-Regular.ttf',
+  variable: '--font-geist-',
   weight: '100 900',
 })
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistPalanquin.variable} ${geistPostNoBillsJaffna.variable} antialiased`}
       >
         <Header />
         {children}

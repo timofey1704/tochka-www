@@ -54,11 +54,16 @@ class Schedule(models.Model):
         return self.date
     
 class Texts(models.Model):
-    text = models.CharField(max_length=1000)
-    path = models.CharField(max_length=20)
+    name = models.CharField(max_length=1000, null=True)
+    description = models.CharField(max_length=256, null=True)
+    link = models.CharField(max_length=255, null=True)
+    icon = models.CharField(max_length=255, null=True)
+    component = models.CharField(max_length=20, null=True)
+    
     class Meta:
         verbose_name = "Текст"
         verbose_name_plural = "Тексты"
     
     def __str__(self):
-        return self.path
+        return self.component
+    

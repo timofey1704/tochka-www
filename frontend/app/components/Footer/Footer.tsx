@@ -37,7 +37,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li className="mb-2">
-                <Link href="/instrumental" className="hover:underline">
+                <Link href="/instruments" className="hover:underline">
                   Инструментальная база
                 </Link>
               </li>
@@ -47,7 +47,10 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-4">Администрация</h3>
             <ul className="text-gray-400">
               <li className="mb-2">
-                <Link href="/login" className="hover:underline">
+                <Link
+                  href="http://127.0.0.1:8000/admin/login/?next=/admin/"
+                  className="hover:underline"
+                >
                   Войти
                 </Link>
               </li>
@@ -82,10 +85,15 @@ const Footer = () => {
         </div>
         <div className="mt-8 border-t border-gray-600 pt-4">
           <p className="text-center text-gray-400">
-            &copy; {new Date().getFullYear()}{' '}
-            <Link href="/" className="hover:underline">
-              Tochka Records.
-            </Link>{' '}
+            &copy; {new Date().getFullYear()} Created by{' '}
+            <a
+              href="https://t.me/mnk_mac1ntosh"
+              className="hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              mnk_mac1ntosh.
+            </a>{' '}
             Все права защищены.
           </p>
         </div>
