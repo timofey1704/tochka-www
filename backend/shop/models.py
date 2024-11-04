@@ -54,11 +54,13 @@ class Schedule(models.Model):
         return self.date
     
 class Texts(models.Model):
-    name = models.CharField(max_length=1000, null=True)
-    description = models.CharField(max_length=256, null=True)
-    link = models.CharField(max_length=255, null=True)
-    icon = models.CharField(max_length=255, null=True)
-    component = models.CharField(max_length=20, null=True)
+    name = models.CharField(max_length=1000, null=True, blank=True)
+    description = models.CharField(max_length=256, null=True, blank=True)
+    link = models.CharField(max_length=255, null=True, blank=True)
+    icon = models.CharField(max_length=255, null=True, blank=True)
+    photourl = models.CharField(max_length=255, null=True, blank=True)
+    artistname = models.CharField(max_length=255, null=True, blank=True)
+    component = models.CharField(max_length=20, null=True, blank=True)
     
     class Meta:
         verbose_name = "Текст"

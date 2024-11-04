@@ -12,3 +12,9 @@ export type AboutData = MainData & {
 export type MainTextData = MainData & {
   component: string
 }
+
+export type CustomersData = MainTextData & {
+  id: number
+  photourl: string
+  artistname: string
+}
