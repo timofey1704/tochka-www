@@ -1,3 +1,5 @@
+import { MainTextData } from '@/app/types'
+
 export const fetchAbout = async () => {
   const API_URL = 'http://127.0.0.1:8000/api/v1'
 
@@ -7,5 +9,8 @@ export const fetchAbout = async () => {
   }
 
   const data = await response.json()
-  return data.objects.filter((item: any) => item.component === 'about') || []
+  return (
+    data.objects.filter((item: MainTextData) => item.component === 'about') ||
+    []
+  )
 }
