@@ -23,6 +23,7 @@
 
 Для запуска проекта вам потребуются:
 
+- Node.js (рекомендуется версия 22.6.0 или выше)
 - Django.py (рекомендуется версия Python 3.12 или выше)
 - PostgreSQL (рекомендуется версия 12.x или выше)
 
@@ -31,8 +32,8 @@
 1. **Клонирование репозитория:**
 
    ```sh
-   git clone https://github.com/timofey1704/tochka-www.git
-   cd tochka-www
+   git clone https://github.com/timofey1704/tochka-next.git
+   cd tochka-next
    ```
 
 2. **Установка зависимостей для фронтенда и бэкенда:**
@@ -41,8 +42,8 @@
    cd frontend
    npm install
 
-   cd api
-   npm install
+   cd backend
+   pip install
    ```
 
 3. **Настройка базы данных:**
@@ -50,15 +51,14 @@
    Создайте базу данных PostgreSQL и выполните миграции:
 
    ```sh
-   createdb postgres
-   # Выполните миграции, если они имеются
-   # Например, если используется Sequelize:
-   npx sequelize-cli db:migrate
+   createdb tochkadb
+   python manage.py makemigrations
+   python manage.py migrate
    ```
 
 4. **Настройка переменных окружения:**
 
-   Создайте файл `.env` в директории `api` и добавьте необходимые переменные окружения:
+   Создайте файл `.env` в корневой директории и добавьте необходимые переменные окружения:
 
    ```env
    # telegram data
@@ -67,35 +67,31 @@
 
    # database connection
 
-    DB_USER
+   DB_USER
    DB_HOST
    DB_NAME
    DB_PASSWORD
    DB_PORT = 5432
-
-   # jwt
-
-   JWT_SECRET
    ```
 
 5. **Запуск проекта:**
 
-````
+   ````
    Откройте два терминала или используйте вкладки в одном терминале.
 
    В первом терминале запустите бэкенд:
 
    ```sh
-   cd api
-   npm run dev
-````
+   cd backend
+   python manage.py runserver
+   ````
 
-Во втором терминале запустите фронтенд:
+   Во втором терминале запустите фронтенд:
 
-```sh
-cd frontend
-npm start
-```
+   ```sh
+   cd frontend
+   npm start
+   ```
 
 Теперь проект будет доступен по адресу `http://localhost:3000`.
 
