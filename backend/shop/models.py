@@ -1,12 +1,4 @@
 from django.db import models
-from django.contrib.postgres.fields import ArrayField
-
-# models list:
-# clients
-# instruments
-# requests
-# schedule
-# texts
 
 class Clients(models.Model):
     title = models.CharField(max_length=255)
@@ -38,7 +30,7 @@ class Features(models.Model):
         verbose_name = "Feature"
         verbose_name_plural = "Features"
     def __str__ (self):
-        return f'{self.instrument_id.title} = {self.feature}'
+        return f'{self.instrument_id.title} - {self.feature}'
     
 class Requests(models.Model):
     telegram_id = models.CharField(max_length=255)
@@ -68,8 +60,6 @@ class Texts(models.Model):
     description = models.CharField(max_length=256, null=True, blank=True)
     link = models.CharField(max_length=255, null=True, blank=True)
     icon = models.CharField(max_length=255, null=True, blank=True)
-    photourl = models.CharField(max_length=255, null=True, blank=True)
-    artistname = models.CharField(max_length=255, null=True, blank=True)
     component = models.CharField(max_length=20, null=True, blank=True)
     
     class Meta:
@@ -78,4 +68,13 @@ class Texts(models.Model):
     
     def __str__(self):
         return f'{self.component} - {self.name}'
-    
+
+class Customers(models.Model):
+    artist_name = models.CharField(max_length=25)
+    photourl = models.CharField(max_length=255)
+    link = models.CharField(max_length=255)
+    class Meta:
+        verbose_name = "Исполнитель"
+        verbose_name_plural = "Исполнители" 
+    def __str__ (self):
+        return self.artist_name 

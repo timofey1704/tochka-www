@@ -13,10 +13,11 @@ export type MainTextData = MainData & {
   component: string
 }
 
-export type CustomersData = MainTextData & {
+export type CustomersData = {
   id: number
   photourl: string
   artistname: string
+  link: string
 }
 
 export type Instrument = {

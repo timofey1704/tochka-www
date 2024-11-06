@@ -90,7 +90,7 @@
 
    ```sh
    cd frontend
-   npm start
+   npm run dev
    ```
 
 Теперь проект будет доступен по адресу `http://localhost:3000`.

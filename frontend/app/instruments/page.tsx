@@ -29,7 +29,7 @@ const InstrumentalBase = async () => {
             </section>
 
             <div className="grid pt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {instruments.length > 0 ? (
+              {instruments && instruments.length > 0 ? (
                 instruments.map((instrument) => (
                   <InstrumentCard key={instrument.id} instrument={instrument} />
                 ))
