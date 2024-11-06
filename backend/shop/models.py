@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 
 # models list:
 # clients
@@ -29,6 +30,15 @@ class Instruments(models.Model):
     
     def __str__(self):
         return self.title
+    
+class Features(models.Model):
+    instrument_id = models.ForeignKey(Instruments, on_delete=models.CASCADE)
+    feature = models.CharField(max_length=255, null=True, blank=True)
+    class Meta:
+        verbose_name = "Feature"
+        verbose_name_plural = "Features"
+    def __str__ (self):
+        return f'{self.instrument_id.title} = {self.feature}'
     
 class Requests(models.Model):
     telegram_id = models.CharField(max_length=255)

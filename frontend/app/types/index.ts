@@ -18,3 +18,29 @@ export type CustomersData = MainTextData & {
   photourl: string
   artistname: string
 }
+
+export type Instrument = {
+  id: number
+  title: string
+  img_url: string
+  description: string
+  link: string
+  price: string
+  image: string
+  name: string
+  features: string[]
+}
+
+export type InstrumentCardData = {
+  id: number
+  link: string
+  img_url: string
+  name: string
+  description: string
+  features: string[]
+  title: string
+}
+
+export interface InstrumentCardProps {
+  instrument: InstrumentCardData
+}

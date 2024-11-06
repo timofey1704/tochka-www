@@ -19,17 +19,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from tastypie.api import Api
-from api.models import TelegramMessageResource, ClientsResource, TextsResource
+from api.models import TelegramMessageResource, ClientsResource, TextsResource, InstrumentsResource
 
 #! подключаем эндпоинты
 api = Api(api_name='v1')
 send_message_resource = TelegramMessageResource() #api/v1/send-message
 clients_resource = ClientsResource() #api/v1/clients
 texts_resource = TextsResource() #api/v1/texts
+instruments_resource = InstrumentsResource() #api/v1/instruments
 
 api.register(send_message_resource)
 api.register(clients_resource)
 api.register(texts_resource)
+api.register(instruments_resource)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

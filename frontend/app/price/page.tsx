@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import LeadPopup from '../components/LeadPopup/LeadPopup'
+import LeadPopup from '../components/LeadPopup/TrackFormPopup'
 
 const Price = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)

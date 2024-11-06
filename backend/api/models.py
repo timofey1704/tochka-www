@@ -5,11 +5,9 @@ from tastypie.authorization import Authorization
 import requests
 from django.conf import settings
 from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
+from shop.models import Clients, Instruments, Texts
 from django.db import connection
 from django.http import JsonResponse
-
-
-from shop.models import Clients, Instruments, Requests, Schedule, Texts
 
 class TelegramMessageResource(Resource):
     class Meta:
@@ -61,3 +59,53 @@ class TextsResource(ModelResource):
         resource_name = 'texts'
         allowed_methods = ["get"]
  
+class InstrumentsResource(ModelResource):
+    class Meta:
+        queryset = Instruments.objects.all()
+        resource_name = 'instruments'
+        allowed_methods = ["get"]
+    
+    def get_list(self, request, **kwargs):
+        sql_query = """
+        SELECT 
+            shop_instruments.id,
+            shop_instruments.title,
+            shop_instruments.img_url,
+            shop_instruments.description,
+            shop_instruments.link,
+            shop_instruments.price,
+            shop_features.feature
+        FROM 
+            shop_instruments 
+        LEFT JOIN 
+            shop_features ON shop_instruments.id = shop_features.instrument_id_id;
+        """
+        
+        with connection.cursor() as cursor:
+            cursor.execute(sql_query)
+            rows = cursor.fetchall()
+            
+            instruments = {}
+            for row in rows:
+                instrument_id = row[0]
+                title = row[1]
+                img_url = row[2]
+                description = row[3]
+                link = row[4]
+                price = row[5]
+                feature = row[6]
+                
+                if instrument_id not in instruments:
+                    instruments[instrument_id] = {
+                "id": instrument_id,
+                "title": title,
+                "img_url": img_url,
+                "description": description,
+                "link": link,
+                "price": price,
+                "features": []
+            }
+            if feature:
+                instruments[instrument_id]["features"].append(feature)
+        data = list(instruments.values())
+        return JsonResponse(data, safe=False)        
