@@ -16,7 +16,7 @@ export type MainTextData = MainData & {
 export type CustomersData = {
   id: number
   photourl: string
-  artistname: string
+  artist_name: string
   link: string
 }
 

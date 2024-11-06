@@ -15,7 +15,7 @@ const InstrumentCard: React.FC<InstrumentCardProps> = ({ instrument }) => (
         priority
       />
       <div className="p-4">
-        <h3 className="text-lg font-bold text-gray-900">{instrument.name}</h3>
+        <h3 className="text-lg font-bold text-gray-900">{instrument.title}</h3>
         <section className="mt-2 text-gray-600">
           {instrument.description}
         </section>

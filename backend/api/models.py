@@ -99,19 +99,21 @@ class InstrumentsResource(ModelResource):
                 description = row[3]
                 link = row[4]
                 price = row[5]
-                feature = row[6]
-                
+                feature = row[6]                
+               
                 if instrument_id not in instruments:
                     instruments[instrument_id] = {
-                "id": instrument_id,
-                "title": title,
-                "img_url": img_url,
-                "description": description,
-                "link": link,
-                "price": price,
-                "features": []
-            }
-            if feature:
-                instruments[instrument_id]["features"].append(feature)
+                        "id": instrument_id,
+                        "title": title,
+                        "img_url": img_url,
+                        "description": description,
+                        "link": link,
+                        "price": price,
+                        "features": []
+                    }
+                
+                if feature is not None:
+                    instruments[instrument_id]["features"].append(feature)
+
         data = list(instruments.values())
-        return JsonResponse(data, safe=False)        
+        return JsonResponse(data, safe=False)

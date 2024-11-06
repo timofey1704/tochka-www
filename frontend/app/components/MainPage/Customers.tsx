@@ -23,13 +23,13 @@ const Customers = async () => {
             <div className="flex items-center justify-center mb-4 text-4xl">
               <img
                 src={customer.photourl}
-                alt={customer.artistname}
+                alt={customer.artist_name}
                 className="rounded-full object-cover"
               />
             </div>
 
-            <div className="text-xl text-center font-semibold mb-4 text-black hover:text-blue-700">
-              {customer.artistname}
+            <div className="text-xl text-center font-palanquin font-semibold mb-4 text-black hover:text-blue-700">
+              {customer.artist_name}
             </div>
           </a>
         ))}

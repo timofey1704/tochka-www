@@ -35,7 +35,7 @@ const Favors = async () => {
                   {IconComponent ? <IconComponent /> : null}
                 </Link>
               </div>
-              <h3 className="text-xl text-center font-semibold mb-4 hover:text-blue-700">
+              <h3 className="text-xl text-center font-palanquin font-semibold mb-4 hover:text-blue-700">
                 <Link href={favor.link}>{favor.name}</Link>
               </h3>
               <p className="mt-3 text-gray-600">{favor.description}</p>
