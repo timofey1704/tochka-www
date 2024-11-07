@@ -77,4 +77,19 @@ class Customers(models.Model):
         verbose_name = "Исполнитель"
         verbose_name_plural = "Исполнители" 
     def __str__ (self):
-        return self.artist_name 
+        return self.artist_name
+    
+
+class InstrumentListing(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.CharField(max_length=1000)
+    link  = models.CharField(max_length=15, null=True, blank=True)
+    features = models.JSONField() 
+    images = models.JSONField()    
+    headertexts = models.JSONField()
+    
+    class Meta:
+        verbose_name = "Страница инструменттов"
+        verbose_name_plural = "Страницы инструментов"
+    def __str__(self):
+        return self.name   

@@ -5,7 +5,7 @@ from tastypie.authorization import Authorization
 import requests
 from django.conf import settings
 from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
-from shop.models import Clients, Instruments, Texts, Customers
+from shop.models import Clients, Instruments, Texts, Customers, InstrumentListing
 from django.db import connection
 from django.http import JsonResponse
 
@@ -117,3 +117,9 @@ class InstrumentsResource(ModelResource):
 
         data = list(instruments.values())
         return JsonResponse(data, safe=False)
+    
+class ListingResource(ModelResource):
+    class Meta:
+        queryset = InstrumentListing.objects.all()
+        resource_name = 'listing'
+        allowed_methods = ["get"]
