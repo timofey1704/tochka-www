@@ -51,7 +51,13 @@ export type InstrumentListing = {
   name: string
   link: string
   description: string
-  features: { name: string; description: string }[] // массив объектов с характеристиками
-  images: { src: string; alt: string }[] // массив объектов с изображениями
-  headertexts: { header: string; description: string }[] // массив объектов для заголовков
+  features: { name: string; description: string }[]
+  images: { src: string; alt: string }[]
+  headertexts: { header: string; description: string }[]
+}
+
+export type ListingProps = {
+  params: {
+    link: string
+  }
 }
