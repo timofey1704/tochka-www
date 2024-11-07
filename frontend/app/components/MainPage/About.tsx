@@ -1,8 +1,5 @@
-import {
-  UserGroupIcon,
-  WalletIcon,
-  SpeakerWaveIcon,
-} from '@heroicons/react/20/solid'
+import { HiUserGroup } from 'react-icons/hi2'
+import { FaWallet, FaMicrophoneAlt } from 'react-icons/fa'
 import Link from 'next/link'
 import { AboutData } from '@/app/types'
 import { fetchAbout } from '@/lib/MainPage/fetchAbout'
@@ -11,12 +8,12 @@ const About = async () => {
   const features: AboutData[] = await fetchAbout()
 
   const iconMap: Record<
-    'UserGroupIcon' | 'WalletIcon' | 'SpeakerWaveIcon',
+    'HiUserGroup' | 'FaWallet' | 'FaMicrophoneAlt',
     React.ElementType
   > = {
-    UserGroupIcon,
-    WalletIcon,
-    SpeakerWaveIcon,
+    HiUserGroup,
+    FaWallet,
+    FaMicrophoneAlt,
   }
 
   return (

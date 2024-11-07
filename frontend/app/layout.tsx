@@ -27,6 +27,37 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+
+        <meta name="theme-color" content="#ffffff" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta
+          name="google-site-verification"
+          content="hq2PDzQpvdhkcbqPe2GEORgm1_V3cKzBfCFZP7nF2PM"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+      </head>
       <body
         className={`${geistPalanquin.variable} ${geistPostNoBillsJaffna.variable} antialiased`}
       >
