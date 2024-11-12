@@ -83,7 +83,7 @@ const Price = () => {
           <div className="text-center text-gray-600">
             Для получения дополнительной информации и бронирования, пожалуйста,{' '}
             <button
-              className="text-blue-about-text hover:underline"
+              className="text-blue-700 hover:underline"
               onClick={openPopup}
             >
               свяжитесь с нами
@@ -92,7 +92,7 @@ const Price = () => {
             или по телефону{' '}
             <a
               href="tel:+79622504799"
-              className="text-blue-about-text hover:underline"
+              className="text-blue-700 hover:underline"
             >
               +7 (962) 250-47-99
             </a>{' '}

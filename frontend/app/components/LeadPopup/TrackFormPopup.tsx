@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
-import InputMask from 'react-input-mask'
-import { useDispatch } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import { fetchTrack } from '../../redux/slices/tracksSlice'
-import { showSuccess, showError } from '../../redux/slices/notificationSlice'
+'use client'
 
-const TrackFormPopup = ({ onClose }) => {
+import React, { useState, ChangeEvent } from 'react'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../redux/store'
+import { toast } from 'react-hot-toast'
+import { sendLead } from '@/app/redux/slices/LeadSlice'
+import { showSuccess, showError } from '../../redux/slices/NotificationSlice'
+import { DateCheck } from './DateCheck'
+import { LeadPopupContentProps } from '@/app/types'
+
+const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL
   const [telegram_id, setTelegram_id] = useState('')
   const [phone, setPhone] = useState('')
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [isTelegram_idEmpty, setIsTelegram_idEmpty] = useState(true)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const handleTelegramRequest = async () => {
     if (!telegram_id || !phone || !date || !time || !endTime) {
@@ -33,8 +38,8 @@ const TrackFormPopup = ({ onClose }) => {
 
     try {
       const response = await dispatch(
-        fetchTrack({
-          url: 'http://localhost:4000/requests',
+        sendLead({
+          url: `${API_URL}/send-message`,
           data: databaseDetails,
         })
       ).unwrap()
@@ -43,7 +48,12 @@ const TrackFormPopup = ({ onClose }) => {
       }
     } catch (error) {
       console.error('Ошибка при отправке данных:', error)
-      if (error.reason === 'TIME_UNAVAILABLE') {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'reason' in error &&
+        error.reason === 'TIME_UNAVAILABLE'
+      ) {
         dispatch(
           showError({
             message: 'Выбранное время недоступно.',
@@ -64,7 +74,7 @@ const TrackFormPopup = ({ onClose }) => {
 
     try {
       await dispatch(
-        fetchTrack({
+        sendLead({
           url: 'http://localhost:4000/send-message',
           data: trackDetails,
         })
@@ -87,17 +97,17 @@ const TrackFormPopup = ({ onClose }) => {
     }
   }
 
-  const handleAuthorChange = (e) => {
+  const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTelegram_id(e.target.value)
     setIsTelegram_idEmpty(e.target.value === '')
   }
 
-  const handlePhoneChange = (e) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     const phoneValue = e.target.value.replace(/\D/g, '')
     setPhone(phoneValue)
   }
 
-  const handleDateChange = (e) => {
+  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selectedDate = new Date(e.target.value)
     const today = new Date()
     const oneMonthFromToday = new Date()
@@ -154,6 +164,7 @@ const TrackFormPopup = ({ onClose }) => {
             <label className="block text-gray-700 mb-2" htmlFor="date">
               Дата:
             </label>
+            <DateCheck />
             <input
               type="date"
               id="date"
@@ -194,7 +205,7 @@ const TrackFormPopup = ({ onClose }) => {
               Контактный телефон:
             </label>
             <div className="relative">
-              <InputMask
+              {/* <InputMask
                 mask="+7 (999) 999-99-99"
                 placeholder="+7 (___) ___-__-__"
                 type="text"
@@ -202,7 +213,7 @@ const TrackFormPopup = ({ onClose }) => {
                 value={phone}
                 onChange={handlePhoneChange}
                 className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              /> */}
             </div>
           </div>
 

@@ -63,10 +63,12 @@ export type ListingProps = {
 }
 
 export type Lead = {
-  message: string
+  message?: string
   phone?: string
   date?: string
+  reason?: string
 }
+
 export type LeadRequest = {
   url: string
   data: Lead
@@ -75,4 +77,8 @@ export type LeadState = {
   leads: Lead[]
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error: string | null
+}
+
+export type LeadPopupContentProps = {
+  onClose: () => void
 }
