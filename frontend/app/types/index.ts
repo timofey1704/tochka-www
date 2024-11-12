@@ -61,3 +61,18 @@ export type ListingProps = {
     link: string
   }
 }
+
+export type Lead = {
+  message: string
+  phone?: string
+  date?: string
+}
+export type LeadRequest = {
+  url: string
+  data: Lead
+}
+export type LeadState = {
+  leads: Lead[]
+  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: string | null
+}
