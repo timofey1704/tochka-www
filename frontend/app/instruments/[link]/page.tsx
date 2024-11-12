@@ -5,8 +5,9 @@ import { InstrumentListing, ListingProps } from '@/app/types'
 import { notFound } from 'next/navigation'
 
 const InstrumentalListing = async ({ params }: ListingProps) => {
+  const { link } = await params
   const listings: InstrumentListing[] = await fetchInstrumentsListing()
-  const listing = listings.find((list) => list.link === params.link)
+  const listing = listings.find((list) => list.link === link)
 
   if (!listing) {
     notFound()

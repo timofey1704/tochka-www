@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
