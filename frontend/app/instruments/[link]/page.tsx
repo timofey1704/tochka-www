@@ -16,7 +16,6 @@ const InstrumentalListing = async ({ params }: ListingProps) => {
     <div className="bg-white">
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-24 sm:px-6 sm:py-32 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
-          {/* Render only the matched listing */}
           {listing.headertexts &&
             Array.isArray(listing.headertexts) &&
             listing.headertexts.map((headerText, idx) => (
@@ -31,7 +30,6 @@ const InstrumentalListing = async ({ params }: ListingProps) => {
             ))}
 
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-            {/* Render features of the matched listing */}
             {listing.features &&
               Array.isArray(listing.features) &&
               listing.features.map((feature, idx) => (
@@ -45,7 +43,6 @@ const InstrumentalListing = async ({ params }: ListingProps) => {
           </dl>
         </div>
         <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-          {/* Render images of the matched listing */}
           {listing.images &&
             Array.isArray(listing.images) &&
             listing.images.map((image, idx) => (
