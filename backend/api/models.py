@@ -8,6 +8,7 @@ from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
 from shop.models import Clients, Instruments, Texts, Customers, InstrumentListing
 from django.db import connection
 from django.http import JsonResponse
+from datetime import datetime
 
 class TelegramMessageResource(Resource):
     class Meta:
@@ -50,7 +51,36 @@ class ClientsResource(ModelResource):
     class Meta:
         queryset = Clients.objects.all()
         resource_name = 'clients'
-        allowed_methods = ["get"]
+        allowed_methods = ['post']
+
+    def obj_create(self, bundle, **kwargs):
+        try:
+            # Extract data from the incoming request
+            client_data = bundle.data
+            
+            # Convert date from string (ISO format) to a Date object
+            try:
+                date = datetime.strptime(client_data['date'], '%Y-%m-%d').date()
+            except ValueError:
+                raise ImmediateHttpResponse(HttpBadRequest("Invalid date format. Use YYYY-MM-DD."))
+
+            # Create a new client instance with the provided data
+            client = Clients(
+                telegram_id=client_data.get('telegram_id'),
+                date=date,
+                time=client_data.get('time'),
+                end_time=client_data.get('end_time'),
+                phone=client_data.get('phone')
+            )
+            client.save()  # Save the client to the database
+
+            # Return the created client in the response
+            bundle.obj = client
+            return bundle
+
+        except Exception as e:
+            # Handle general errors (e.g., missing required fields)
+            raise ImmediateHttpResponse(HttpBadRequest(f"Error: {str(e)}"))
         
         
 class TextsResource(ModelResource):

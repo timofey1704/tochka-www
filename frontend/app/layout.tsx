@@ -52,11 +52,6 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <meta
-          name="google-site-verification"
-          content="hq2PDzQpvdhkcbqPe2GEORgm1_V3cKzBfCFZP7nF2PM"
-        />
-        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body
         className={`${geistPalanquin.variable} ${geistPostNoBillsJaffna.variable} antialiased`}

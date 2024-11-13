@@ -13,7 +13,7 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL
   const [telegram_id, setTelegram_id] = useState('')
   const [phone, setPhone] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState<Date | undefined>(undefined)
   const [time, setTime] = useState('')
   const [endTime, setEndTime] = useState('')
   const [isTelegram_idEmpty, setIsTelegram_idEmpty] = useState(true)
@@ -30,7 +30,7 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     }
     const databaseDetails = {
       telegram_id,
-      date,
+      date: date.toISOString().split('T')[0],
       time,
       end_time: endTime,
       phone,
@@ -39,7 +39,7 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     try {
       const response = await dispatch(
         sendLead({
-          url: `${API_URL}/send-message`,
+          url: `${API_URL}/clients/`,
           data: databaseDetails,
         })
       ).unwrap()
@@ -75,7 +75,7 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     try {
       await dispatch(
         sendLead({
-          url: 'http://localhost:4000/send-message',
+          url: `${API_URL}/send-message/`,
           data: trackDetails,
         })
       )
@@ -107,24 +107,24 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     setPhone(phoneValue)
   }
 
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const selectedDate = new Date(e.target.value)
-    const today = new Date()
-    const oneMonthFromToday = new Date()
-    oneMonthFromToday.setMonth(today.getMonth() + 1)
+  // const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const selectedDate = new Date(e.target.value)
+  //   const today = new Date()
+  //   const oneMonthFromToday = new Date()
+  //   oneMonthFromToday.setMonth(today.getMonth() + 1)
 
-    if (selectedDate < today) {
-      toast.error('Нельзя записаться в прошлое', { icon: '🤪' })
-      setDate('')
-    } else if (selectedDate > oneMonthFromToday) {
-      toast.error('Мы не проводим запись больше, чем на месяц вперед', {
-        icon: '🤪',
-      })
-      setDate('')
-    } else {
-      setDate(e.target.value)
-    }
-  }
+  //   if (selectedDate < today) {
+  //     toast.error('Нельзя записаться в прошлое', { icon: '🤪' })
+  //     setDate('')
+  //   } else if (selectedDate > oneMonthFromToday) {
+  //     toast.error('Мы не проводим запись больше, чем на месяц вперед', {
+  //       icon: '🤪',
+  //     })
+  //     setDate('')
+  //   } else {
+  //     setDate(e.target.value)
+  //   }
+  // }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -164,14 +164,7 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
             <label className="block text-gray-700 mb-2" htmlFor="date">
               Дата:
             </label>
-            <DateCheck />
-            <input
-              type="date"
-              id="date"
-              value={date}
-              onChange={handleDateChange}
-              className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            <DateCheck selectedDate={date} onDateChange={setDate} />
           </div>
 
           <div className="mb-4 flex">
@@ -205,15 +198,14 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
               Контактный телефон:
             </label>
             <div className="relative">
-              {/* <InputMask
-                mask="+7 (999) 999-99-99"
+              <input
+                type="tel"
                 placeholder="+7 (___) ___-__-__"
-                type="text"
                 id="phone"
                 value={phone}
                 onChange={handlePhoneChange}
                 className="px-3 py-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              /> */}
+              />
             </div>
           </div>
 

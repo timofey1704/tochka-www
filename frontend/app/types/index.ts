@@ -82,3 +82,8 @@ export type LeadState = {
 export type LeadPopupContentProps = {
   onClose: () => void
 }
+
+export type DateCheckProps = {
+  selectedDate: Date | undefined
+  onDateChange: (date: Date | undefined) => void
+}

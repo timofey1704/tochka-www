@@ -1,15 +1,18 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 class Clients(models.Model):
-    title = models.CharField(max_length=255)
-    img_url = models.CharField(max_length=255)
-    url = models.CharField(max_length=255)
+    telegram_id = models.CharField(max_length=255)
+    date = models.DateField(null=True, blank=True)
+    time = models.TimeField(null=True, blank=True)
+    endTime = models.TimeField(null=True, blank=True)
+    phone = PhoneNumberField(null=True, blank=True)
     class Meta:
         verbose_name = "Клиент"
         verbose_name_plural = "Клиенты"
     
     def __str__(self):
-        return self.title
+        return f"{self.telegram_id} - {self.date}"
 class Instruments(models.Model):
     title = models.CharField(max_length=255)
     img_url = models.CharField(max_length=255)
@@ -92,4 +95,4 @@ class InstrumentListing(models.Model):
         verbose_name = "Страница инструменттов"
         verbose_name_plural = "Страницы инструментов"
     def __str__(self):
-        return self.name   
+        return self.name

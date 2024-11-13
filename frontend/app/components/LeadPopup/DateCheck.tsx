@@ -11,8 +11,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { DateCheckProps } from '@/app/types'
 
-export function DateCheck() {
+export function DateCheck({ selectedDate, onDateChange }: DateCheckProps) {
   const [date, setDate] = React.useState<Date>()
 
   return (
@@ -21,12 +22,12 @@ export function DateCheck() {
         <Button
           variant={'outline'}
           className={cn(
-            'w-[280px] justify-start text-left font-normal',
+            'w-full justify-start text-left font-normal',
             !date && 'text-muted-foreground'
           )}
         >
           <CalendarIcon />
-          {date ? format(date, 'PPP') : <span>Pick a date</span>}
+          {date ? format(date, 'PPP') : <span>Выберите дату для записи</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
