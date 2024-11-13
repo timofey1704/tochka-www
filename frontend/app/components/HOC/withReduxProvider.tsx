@@ -1,8 +1,9 @@
 import { Provider } from 'react-redux'
+import { ComponentType } from 'react'
 import store from '../../redux/store'
 
-const withReduxProvider = (Component: React.ComponentType) => {
-  return function WithReduxProvider(props: any) {
+const withReduxProvider = <P extends object>(Component: ComponentType<P>) => {
+  return function WithReduxProvider(props: P) {
     return (
       <Provider store={store}>
         <Component {...props} />

@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import LeadPopup from '../components/LeadPopup/TrackFormPopup'
+import PopupProvider from '../components/LeadPopup/PopupProvider'
 
 const Price = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
@@ -88,7 +88,9 @@ const Price = () => {
             >
               свяжитесь с нами
             </button>{' '}
-            {isPopupOpen && <LeadPopup onClose={() => setIsPopupOpen(false)} />}
+            {isPopupOpen && (
+              <PopupProvider onClose={() => setIsPopupOpen(false)} />
+            )}
             или по телефону{' '}
             <a
               href="tel:+79622504799"
