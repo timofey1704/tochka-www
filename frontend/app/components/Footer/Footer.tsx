@@ -26,11 +26,11 @@ const Footer = () => {
                   Цены
                 </Link>
               </li>
-              <li className="mb-2">
+              {/* <li className="mb-2">
                 <Link href="/schedule" className="hover:underline">
                   Расписание
                 </Link>
-              </li>
+              </li> */}
               <li className="mb-2">
                 <Link href="/mastering" className="hover:underline">
                   Трек под ключ
