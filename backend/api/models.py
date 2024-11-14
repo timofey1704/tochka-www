@@ -5,6 +5,7 @@ from tastypie.authorization import Authorization
 import requests
 from django.conf import settings
 from tastypie.http import HttpBadRequest, HttpApplicationError, HttpCreated
+from tastypie.exceptions import BadRequest
 from shop.models import Clients, Instruments, Texts, Customers, InstrumentListing
 from django.db import connection
 from django.http import JsonResponse
@@ -52,36 +53,38 @@ class ClientsResource(ModelResource):
         queryset = Clients.objects.all()
         resource_name = 'clients'
         allowed_methods = ['post']
+        always_return_data = True
 
     def obj_create(self, bundle, **kwargs):
-        try:
-            # Extract data from the incoming request
-            client_data = bundle.data
-            
-            # Convert date from string (ISO format) to a Date object
-            try:
-                date = datetime.strptime(client_data['date'], '%Y-%m-%d').date()
-            except ValueError:
-                raise ImmediateHttpResponse(HttpBadRequest("Invalid date format. Use YYYY-MM-DD."))
-
-            # Create a new client instance with the provided data
-            client = Clients(
-                telegram_id=client_data.get('telegram_id'),
-                date=date,
-                time=client_data.get('time'),
-                end_time=client_data.get('end_time'),
-                phone=client_data.get('phone')
-            )
-            client.save()  # Save the client to the database
-
-            # Return the created client in the response
-            bundle.obj = client
-            return bundle
-
-        except Exception as e:
-            # Handle general errors (e.g., missing required fields)
-            raise ImmediateHttpResponse(HttpBadRequest(f"Error: {str(e)}"))
         
+        data = bundle.data
+        telegram_id = data.get("telegram_id")
+        date = data.get("date")
+        time = data.get("time")
+        end_time = data.get("end_time")
+        phone = data.get("phone")
+
+        
+        if not all([telegram_id, date, time, end_time, phone]):
+            raise BadRequest("Все поля обязательны для заполнения")
+
+        
+        try:
+            date = datetime.strptime(date, '%Y-%m-%d').date()
+        except ValueError:
+            raise BadRequest("Неверный формат даты, ожидается ГГГГ-ММ-ДД")
+
+        
+        client = Clients.objects.create(
+            telegram_id=telegram_id,
+            date=date,
+            time=time,
+            end_time=end_time,
+            phone=phone
+        )
+
+        bundle.obj = client
+        return bundle
         
 class TextsResource(ModelResource):
     class Meta:

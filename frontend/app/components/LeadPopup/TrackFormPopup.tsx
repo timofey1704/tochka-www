@@ -43,7 +43,10 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
           data: databaseDetails,
         })
       ).unwrap()
-
+      dispatch(
+        showSuccess({ message: 'Будем вас ждать!', position: 'top-center' })
+      )
+      onClose()
       if (response.reason === 'TIME_UNAVAILABLE') {
       }
     } catch (error) {
@@ -72,29 +75,29 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
       return
     }
 
-    try {
-      await dispatch(
-        sendLead({
-          url: `${API_URL}/send-message/`,
-          data: trackDetails,
-        })
-      )
-      onClose()
-      dispatch(
-        showSuccess({
-          message: 'Заявка успешно отправлена!',
-          position: 'top-center',
-        })
-      )
-    } catch (error) {
-      console.error('Ошибка при отправке сообщения:', error)
-      dispatch(
-        showError({
-          message: 'Ошибка при отправке сообщения',
-          position: 'top-center',
-        })
-      )
-    }
+    // try {
+    //   await dispatch(
+    //     sendLead({
+    //       url: `${API_URL}/send-message/`,
+    //       data: trackDetails,
+    //     })
+    //   )
+    //   onClose()
+    //   dispatch(
+    //     showSuccess({
+    //       message: 'Заявка успешно отправлена!',
+    //       position: 'top-center',
+    //     })
+    //   )
+    // } catch (error) {
+    //   console.error('Ошибка при отправке сообщения:', error)
+    //   dispatch(
+    //     showError({
+    //       message: 'Ошибка при отправке сообщения',
+    //       position: 'top-center',
+    //     })
+    //   )
+    // }
   }
 
   const handleAuthorChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -106,25 +109,6 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
     const phoneValue = e.target.value.replace(/\D/g, '')
     setPhone(phoneValue)
   }
-
-  // const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const selectedDate = new Date(e.target.value)
-  //   const today = new Date()
-  //   const oneMonthFromToday = new Date()
-  //   oneMonthFromToday.setMonth(today.getMonth() + 1)
-
-  //   if (selectedDate < today) {
-  //     toast.error('Нельзя записаться в прошлое', { icon: '🤪' })
-  //     setDate('')
-  //   } else if (selectedDate > oneMonthFromToday) {
-  //     toast.error('Мы не проводим запись больше, чем на месяц вперед', {
-  //       icon: '🤪',
-  //     })
-  //     setDate('')
-  //   } else {
-  //     setDate(e.target.value)
-  //   }
-  // }
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

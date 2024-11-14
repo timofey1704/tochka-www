@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -12,29 +12,56 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { DateCheckProps } from '@/app/types'
+import { toast } from 'react-hot-toast'
 
 export function DateCheck({ selectedDate, onDateChange }: DateCheckProps) {
-  const [date, setDate] = React.useState<Date>()
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+
+  const handleDateChange = (date: Date | undefined) => {
+    if (!date) return
+
+    const today = new Date()
+    const oneMonthFromToday = new Date()
+    oneMonthFromToday.setMonth(today.getMonth() + 1)
+
+    if (date < today) {
+      toast.error('Нельзя записаться в прошлое', { icon: '🤪' })
+      onDateChange(undefined)
+    } else if (date > oneMonthFromToday) {
+      toast.error('Мы не проводим запись больше, чем на месяц вперед', {
+        icon: '🤪',
+      })
+      onDateChange(undefined)
+    } else {
+      onDateChange(date)
+      setIsPopoverOpen(false)
+    }
+  }
 
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           variant={'outline'}
           className={cn(
             'w-full justify-start text-left font-normal',
-            !date && 'text-muted-foreground'
+            !selectedDate && 'text-muted-foreground'
           )}
+          onClick={() => setIsPopoverOpen(!isPopoverOpen)}
         >
           <CalendarIcon />
-          {date ? format(date, 'PPP') : <span>Выберите дату для записи</span>}
+          {selectedDate ? (
+            format(selectedDate, 'PPP')
+          ) : (
+            <span>Выберите дату для записи</span>
+          )}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
           mode="single"
-          selected={date}
-          onSelect={setDate}
+          selected={selectedDate}
+          onSelect={handleDateChange}
           initialFocus
         />
       </PopoverContent>

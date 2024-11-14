@@ -5,7 +5,7 @@ class Clients(models.Model):
     telegram_id = models.CharField(max_length=255)
     date = models.DateField(null=True, blank=True)
     time = models.TimeField(null=True, blank=True)
-    endTime = models.TimeField(null=True, blank=True)
+    end_time = models.TimeField(null=True, blank=True)
     phone = PhoneNumberField(null=True, blank=True)
     class Meta:
         verbose_name = "Клиент"

@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import { Toaster } from 'react-hot-toast'
 
 const geistPalanquin = localFont({
   src: '../public/fonts/palanquin/Palanquin-Regular.ttf',
@@ -33,18 +34,6 @@ export default function RootLayout({
           sizes="180x180"
           href="/apple-touch-icon.png"
         />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
 
         <meta name="theme-color" content="#ffffff" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -58,6 +47,7 @@ export default function RootLayout({
       >
         <Header />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
