@@ -8,6 +8,7 @@ import { sendLead } from '@/app/redux/slices/LeadSlice'
 import { showSuccess, showError } from '../../redux/slices/NotificationSlice'
 import { DateCheck } from './DateCheck'
 import { LeadPopupContentProps } from '@/app/types'
+import CompleteNotification from './CompleteNotification'
 
 const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
   const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -43,10 +44,15 @@ const TrackFormPopup: React.FC<LeadPopupContentProps> = ({ onClose }) => {
           data: databaseDetails,
         })
       ).unwrap()
-      dispatch(
-        showSuccess({ message: 'Будем вас ждать!', position: 'top-center' })
-      )
       onClose()
+      toast.custom(
+        <CompleteNotification
+          date={databaseDetails.date}
+          time={databaseDetails.time}
+          end_time={databaseDetails.end_time}
+        />,
+        { position: 'bottom-right' }
+      )
       if (response.reason === 'TIME_UNAVAILABLE') {
       }
     } catch (error) {

@@ -143,7 +143,6 @@ LANGUAGES = [
 TIME_ZONE = 'Etc/GMT-3'
 
 USE_I18N = True
-
 USE_L10N = True
 
 
