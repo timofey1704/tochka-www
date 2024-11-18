@@ -1,7 +1,13 @@
-from tastypie.authentication import ApiKeyAuthentication
+from tastypie.authentication import Authentication
+from tastypie.exceptions import ImmediateHttpResponse
+from django.conf import settings
+from tastypie.http import HttpUnauthorized
 
-class CustomAuthentication(ApiKeyAuthentication):
-     def is_authenticated(self, request, **kwargs):
-          if request.method == 'GET': #если фронт отправляет гет запрос, то он пройдет. Если запрос не GET, то 403
-              return True
-          return super().is_authenticated(request, **kwargs)
+class ApiKeyAuthentication(Authentication):
+    def is_authenticated(self, request, **kwargs):
+        api_key = request.META.get('HTTP_X_API_KEY')
+        if api_key == settings.API_KEY:
+            return True
+        raise ImmediateHttpResponse(HttpUnauthorized('Wrong API Key'))
+    def get_identifier(self, request):
+        return request.META.get('HTTP_X_API_KEY', 'unknown')

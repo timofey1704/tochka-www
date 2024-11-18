@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost:3000', '127.0.0.1']
 
+API_KEY = os.environ.get("API_KEY")
 
 # Application definition
 
