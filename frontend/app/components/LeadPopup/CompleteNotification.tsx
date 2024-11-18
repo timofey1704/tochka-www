@@ -1,9 +1,5 @@
 import React from 'react'
-interface CompleteNotificationProps {
-  date: string
-  time: string
-  end_time: string
-}
+import { CompleteNotificationProps } from '@/app/types'
 
 const CompleteNotification: React.FC<CompleteNotificationProps> = ({
   date,

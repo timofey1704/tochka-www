@@ -87,3 +87,13 @@ export type DateCheckProps = {
   selectedDate: Date | undefined
   onDateChange: (date: Date | undefined) => void
 }
+
+export interface CompleteNotificationProps {
+  date: string
+  time: string
+  end_time: string
+}
+
+export interface BottomFormProps {
+  onClose: () => void
+}
