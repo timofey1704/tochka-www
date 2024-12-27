@@ -1,0 +1,28 @@
+networks:
+  master:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - master
+
+  backend:
+    build:
+      context: ./backend
+    networks:
+      - master
+
+  frontend:
+    build:
+      context: ./frontend
+    networks:
+      - master
